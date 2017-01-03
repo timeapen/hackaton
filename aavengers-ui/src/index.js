@@ -9,10 +9,12 @@ import {header} from './app/header';
 import {title} from './app/title';
 import {footer} from './app/footer';
 
+import {mapsModule} from './app/maps/index';
+
 import './index.scss';
 
 angular
-  .module('app', [techsModule, 'ui.router'])
+  .module('app', [techsModule, mapsModule, 'ui.router'])
   .config(routesConfig)
   .component('app', main)
   .component('fountainHeader', header)
