@@ -25,7 +25,7 @@
     {
       "type": "pie", 
       "title":{
-        "text": "Earnings Insights<br>Corporate Overview",
+        "text": "Corruption Index",
         "align": "right",
         "fontColor": "#616161"
       },
@@ -43,7 +43,7 @@
           "width": 100
         },
         "header":{
-          "text":"Business Units",
+          "text":"Total $",
           "align": "right",
           "fontSize": 13,
           "bold": true,
@@ -90,99 +90,62 @@
       },
       "series" : [
         {
-          "values" : [119968796],
-          "url": "./app/charts/pie/XUWNNU55/pie_level2_purp.txt",
-          "target": "graph",
-          "text":"Operating System",
-          "backgroundColor": "#4527A0",
+          "values" : [85948575],
+          "url":"./app/charts/pie/data/pie_level2_red.txt",
+          "target":"graph",
+          "text":"@ RISK!",
+          "backgroundColor": "#FF0000",
           "legendText": "%t<br><b>$%v</b>",
           "legendMarker":{
             "type": "circle",
             "size": 7,
-            "borderColor": "#4527A0",
+            "borderColor": "#FF0000",
             "borderWidth": 4,
             "backgroundColor":"#fff"
           },
           "legendItem":{
-            "backgroundColor": "#4527A0"
+            "backgroundColor": "#FF0000"
+          }
+        },
+        {
+          "values" : [119968796],
+          "url": "./app/charts/pie/data/pie_level2_blue.txt",
+          "target": "graph",
+          "text":"Near Risk",
+          "backgroundColor": "#0000FF",
+          "legendText": "%t<br><b>$%v</b>",
+          "legendMarker":{
+            "type": "circle",
+            "size": 7,
+            "borderColor": "#0000FF",
+            "borderWidth": 4,
+            "backgroundColor":"#FFF"
+          },
+          "legendItem":{
+            "backgroundColor": "#0000FF"
           },
           "tooltip":{
-            "backgroundColor": "#4527A0"
+            "backgroundColor": "#0000FF"
           }
         },
         {
           "values" : [97503958],
-          "url":"./app/charts/pie/J5KCXN0L/pie_level2_blue.txt",
+          "url":"./app/charts/pie/data/pie_level2_green.txt",
           "target":"graph",
-          "text":"Network and Tools",
-          "backgroundColor": "#1565C0",
+          "text":"Safe",
+          "backgroundColor": "#00FF00",
           "legendText": "%t<br><b>$%v</b>",
           "legendMarker":{
             "type": "circle",
             "size": 7,
-            "borderColor": "#1565C0",
+            "borderColor": "#00FF00",
             "borderWidth": 4,
             "backgroundColor":"#fff"
           },
           "legendItem":{
-            "backgroundColor": "#1565C0"
+            "backgroundColor": "#00FF00"
           }
-        },
-        {
-          "values" : [85948575],
-          "url":"./app/charts/pie/J5KCXN0L/pie_level2_red.txt",
-          "target":"graph",
-          "text":"Business Division",
-          "backgroundColor": "#AD1457",
-          "legendText": "%t<br><b>$%v</b>",
-          "legendMarker":{
-            "type": "circle",
-            "size": 7,
-            "borderColor": "#AD1457",
-            "borderWidth": 4,
-            "backgroundColor":"#fff"
-          },
-          "legendItem":{
-            "backgroundColor": "#AD1457"
-          }
-        },
-        {
-          "values" : [62096876],
-          "url":"./app/charts/pie/J5KCXN0L/pie_level2_green.txt",
-          "target":"graph",
-          "text":"Online Services",
-          "backgroundColor": "#00695C",
-          "legendText": "%t<br><b>$%v</b>",
-          "legendMarker":{
-            "type": "circle",
-            "size": 7,
-            "borderColor": "#00695C",
-            "borderWidth": 4,
-            "backgroundColor":"#fff"
-          },
-          "legendItem":{
-            "backgroundColor": "#00695C"
-          }
-        },
-        {
-          "values" : [40467564],
-          "url":"./app/charts/pie/J5KCXN0L/pie_level2_orange.txt",
-          "target":"graph",
-          "text":"Entertainment",
-          "backgroundColor": "#EF6C00",
-          "legendText": "%t<br><b>$%v</b>",
-          "legendMarker":{
-            "type": "circle",
-            "size": 7,
-            "borderColor": "#EF6C00",
-            "borderWidth": 4,
-            "backgroundColor":"#fff"
-          },
-          "legendItem":{
-            "backgroundColor": "#EF6C00"
-          }
-        }
-      ]
+        }      ]
     }
   ]
 }

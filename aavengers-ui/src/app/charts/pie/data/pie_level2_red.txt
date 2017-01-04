@@ -1,7 +1,7 @@
- {
+  {
  	type: "pie", 
  	title:{
- 	  text: "Earnings Insights<br>Online Services",
+ 	  text: "@ Risk Positions",
  	  align: "right",
  	  fontColor: "#616161"
  	},
@@ -19,7 +19,7 @@
       width: 100
  	  },
  	  header:{
- 	    text:"Online Services",
+ 	    text:"Total $",
  	    align: "right",
  	    fontSize: 13,
  	    bold: true,
@@ -65,98 +65,98 @@
   },
 	series : [
 		{
-			values : [19357845],
-			text:"Search",
-			backgroundColor: "#00796B",
+			values : [25684578],
+			text:"Enterprise",
+			backgroundColor: "#FF005D",
 			legendText: "%t<br><b>$%v</b>",
 			legendMarker:{
 			  type: "circle",
 			  size: 7,
-			  borderColor: "#00796B",
+			  borderColor: "#FF005D",
 			  borderWidth: 4,
 			  backgroundColor:"#fff"
 			},
 			legendItem:{
-        		backgroundColor: "#00796B"
+        		backgroundColor: "#FF005D"
 			},
 			tooltip:{
-     	  		backgroundColor: "#00796B"
+     	  		backgroundColor: "#FF005D"
      		}
 		},
 		{
-			values : [17568457],
-			text:"Cloud Storage",
-			backgroundColor: "#00897B",
+			values : [19245687],
+			text:"Office Suites",
+			backgroundColor: "#FF0042",
 			legendText: "%t<br><b>$%v</b>",
 			legendMarker:{
 			  type: "circle",
 			  size: 7,
-			  borderColor: "#00897B",
+			  borderColor: "#FF0042",
 			  borderWidth: 4,
 			  backgroundColor:"#fff"
 			},
 			legendItem:{
-        		backgroundColor: "#00897B"
+        		backgroundColor: "#FF0042"
 			},
 			tooltip:{
-     	  		backgroundColor: "#00897B"
+     	  		backgroundColor: "#FF0042"
      		}
 		},
 		{
-			values : [12547845],
-			text:"Ad Revenue",
-			backgroundColor: "#009688",
+			values : [15457841],
+			text:"Consulting",
+			backgroundColor: "#FF002B",
 			legendText: "%t<br><b>$%v</b>",
 			legendMarker:{
 			  type: "circle",
 			  size: 7,
-			  borderColor: "#009688",
+			  borderColor: "#FF002B",
 			  borderWidth: 4,
 			  backgroundColor:"#fff"
 			},
 			legendItem:{
-        backgroundColor: "#009688"
+        backgroundColor: "#FF002B"
 			},
 			tooltip:{
-     	  		backgroundColor: "#009688"
+     	  		backgroundColor: "#FF002B"
      		}
 		},
 		{
-			values : [7045987],
-			text:"Mobile Delivery",
-			backgroundColor: "#26A69A",
+			values : [14985689],
+			text:"Mobile Products",
+			backgroundColor: "#FF001B",
 			legendText: "%t<br><b>$%v</b>",
 			legendMarker:{
 			  type: "circle",
 			  size: 7,
-			  borderColor: "#26A69A",
+			  borderColor: "#FF001B",
 			  borderWidth: 4,
 			  backgroundColor:"#fff"
 			},
 			legendItem:{
-        backgroundColor: "#26A69A"
+        backgroundColor: "#FF001B"
 			},
 			tooltip:{
-     	  		backgroundColor: "#26A69A"
+     	  		backgroundColor: "#FF001B"
      		}
 		},
 		{
-			values : [5576742],
-			text:"Developer Tools",
-			backgroundColor: "#4DB6AC",
+			values : [10547780],
+			text:"Security",
+			backgroundColor: "#FF0008",
 			legendText: "%t<br><b>$%v</b>",
 			legendMarker:{
 			  type: "circle",
 			  size: 7,
-			  borderColor: "#4DB6AC",
+			  borderColor: "#FF0008",
 			  borderWidth: 4,
 			  backgroundColor:"#fff"
 			},
 			legendItem:{
-        		backgroundColor: "#4DB6AC"
+        		backgroundColor: "#FF0008"
 			},
 			tooltip:{
-     	  		backgroundColor: "#4DB6AC"
+     	  		backgroundColor: "#FF0008"
      		}
 		}
 	]
