@@ -3,9 +3,9 @@ import angular from 'angular';
 import {pie} from './pie';
 import {radar} from './radar';
 
-export const mapsModule = 'maps';
+export const chartsModule = 'charts';
 
 angular
-  .module(mapsModule, [])
+  .module(chartsModule, ['zingchart-angularjs'])
   .component('pie', pie)
   .component('radar', radar);

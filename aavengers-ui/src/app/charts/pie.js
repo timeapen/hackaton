@@ -3,7 +3,7 @@ class PieController {
   constructor($http, $log) {
     $log.info('PIE');
     $http
-      .get('app/maps/pie.json')
+      .get('app/charts/pie.json')
       .then(response => {
         this.techs = response.data;
       });
