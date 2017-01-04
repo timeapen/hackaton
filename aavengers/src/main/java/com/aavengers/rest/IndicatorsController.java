@@ -11,7 +11,8 @@ public class IndicatorsController {
     @ResponseBody
     @GetMapping(value = "/indicators", produces = "application/json")
     public Indicators getIndicators() {
-        Indicators result = new Indicators(new String[] {"Corruption", "Environment", "Conflict", "Other"}, new String[] {"Poor",
+        Indicators result = new Indicators(new String[] {"Corruption", "Environment", "Conflict", "Other"},
+                new String[] {"Poor",
                 "Fair",
                 "Good",
                 "Very Good",

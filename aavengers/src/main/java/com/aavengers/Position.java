@@ -2,6 +2,7 @@ package com.aavengers;
 
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "ACHS_App")
@@ -18,6 +19,20 @@ public class Position {
 
     @Column(name = "Loc_Sec_Num_KEY", columnDefinition="CHAR(12)")
     String locSecNum;
+
+    @Column(name = "settled_acct_ccy_mkt_val", columnDefinition="DOUBLE")
+    BigDecimal mktVal;
+
+    @Column(name = "settled_marketval_acctccy", columnDefinition="CHAR(3)")
+    String mktValCcy;
+
+    //@Column(name = "Cntry_Cd_Rpt", columnDefinition="CHAR(3)")
+    //String country;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="Cntry_Cd_Rpt",referencedColumnName="code")
+    Country country;
+
 
     public Long getId() {
         return id;
@@ -49,5 +64,29 @@ public class Position {
 
     public void setLocSecNum(String locSecNum) {
         this.locSecNum = locSecNum;
+    }
+
+    public BigDecimal getMktVal() {
+        return mktVal;
+    }
+
+    public void setMktVal(BigDecimal mktVal) {
+        this.mktVal = mktVal;
+    }
+
+    public String getMktValCcy() {
+        return mktValCcy;
+    }
+
+    public void setMktValCcy(String mktValCcy) {
+        this.mktValCcy = mktValCcy;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }
