@@ -8,13 +8,46 @@ class RadarController {
       .then(response => {
         this.chartData = response.data;
 
-        const gaiaIndices = ["Quality", "Efficiency", "Satisfaction", "Value", "Cost"];
-        this.chartData["scale-k"].values = gaiaIndices;
+        addIndices(this.chartData);
+        addIndexRatings(this.chartData);
 
-        const gaiaIndexRatings = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
-        this.chartData["scale-v"].values = gaiaIndexRatings;
+        $http
+          .get('app/charts/radar-mock-series-data.json')
+          .then(response => {
+            $log.info("Series Data: ", response.data);
+            const positionScores = response.data;
+
+            //TODO: Colors on the radar chart should come from the server and be based on calculated risk factor
+            $http
+             .get('app/charts/radar-series.json')
+             .then(response => {
+               const scoresData = [];
+               angular.forEach(positionScores, (score => {
+                 const scoreChartData = {};
+                 Object.assign(scoreChartData, response.data);
+                 $log.info('Score chart data: ', scoreChartData);
+
+                 scoreChartData.text = score.id;
+                 scoreChartData.values = score.values;
+
+                 scoresData.push(scoreChartData);
+               }));
+               this.chartData.series = scoresData;
+             });
+          });
       });
   }
+
+}
+
+function addIndices(chartData) {
+  const gaiaIndices = ["Quality", "Efficiency", "Satisfaction", "Value", "Cost"];
+  chartData["scale-k"].values = gaiaIndices;
+}
+
+function addIndexRatings(chartData) {
+  const gaiaIndexRatings = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
+  chartData["scale-v"].values = gaiaIndexRatings;
 }
 
 export const radar = {

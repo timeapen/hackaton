@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ER",
+    "values": [
+      "Fair",
+      "Poor",
+      "Good",
+      "Very Good",
+      "Good"
+    ]
+  },
+  {
+    "id": "ENT",
+    "values":  [
+      "Fair",
+      "Poor",
+      "Excellent",
+      "Excellent",
+      "Good"
+    ]
+  },
+  {
+    "id": "O&G",
+    "values": [
+      "Very Good",
+      "Excellent",
+      "Very Good",
+      "Good",
+      "Excellent"
+    ]
+  },
+  {
+    "id": "Pharmacy",
+    "values": [
+      "Poor",
+      "Very Good",
+      "Good",
+      "Good",
+      "Very Good"
+    ]
+  }
+]
