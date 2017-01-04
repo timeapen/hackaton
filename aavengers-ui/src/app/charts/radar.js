@@ -25,7 +25,6 @@ class RadarController {
                angular.forEach(positionScores, (score => {
                  const scoreChartData = {};
                  Object.assign(scoreChartData, response.data);
-                 $log.info('Score chart data: ', scoreChartData);
 
                  scoreChartData.text = score.id;
                  scoreChartData.values = score.values;
