@@ -87,65 +87,7 @@
       },
       "scale":{
         "sizeFactor": 0.75
-      },
-      "series" : [
-        {
-          "values" : [85948575],
-          "url":"./app/charts/pie/data/pie_level2_red.txt",
-          "target":"graph",
-          "text":"@ RISK!",
-          "backgroundColor": "#FF0000",
-          "legendText": "%t<br><b>$%v</b>",
-          "legendMarker":{
-            "type": "circle",
-            "size": 7,
-            "borderColor": "#FF0000",
-            "borderWidth": 4,
-            "backgroundColor":"#fff"
-          },
-          "legendItem":{
-            "backgroundColor": "#FF0000"
-          }
-        },
-        {
-          "values" : [119968796],
-          "url": "./app/charts/pie/data/pie_level2_blue.txt",
-          "target": "graph",
-          "text":"Near Risk",
-          "backgroundColor": "#0000FF",
-          "legendText": "%t<br><b>$%v</b>",
-          "legendMarker":{
-            "type": "circle",
-            "size": 7,
-            "borderColor": "#0000FF",
-            "borderWidth": 4,
-            "backgroundColor":"#FFF"
-          },
-          "legendItem":{
-            "backgroundColor": "#0000FF"
-          },
-          "tooltip":{
-            "backgroundColor": "#0000FF"
-          }
-        },
-        {
-          "values" : [97503958],
-          "url":"./app/charts/pie/data/pie_level2_green.txt",
-          "target":"graph",
-          "text":"Safe",
-          "backgroundColor": "#00FF00",
-          "legendText": "%t<br><b>$%v</b>",
-          "legendMarker":{
-            "type": "circle",
-            "size": 7,
-            "borderColor": "#00FF00",
-            "borderWidth": 4,
-            "backgroundColor":"#fff"
-          },
-          "legendItem":{
-            "backgroundColor": "#00FF00"
-          }
-        }      ]
+      }
     }
   ]
 }
