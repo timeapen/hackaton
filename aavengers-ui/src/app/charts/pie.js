@@ -5,7 +5,8 @@ class PieController {
     $http
       .get('app/charts/pie.json')
       .then(response => {
-        this.techs = response.data;
+        this.chartData = response.data;
+        $log.info(this.chartData);
       });
   }
 }

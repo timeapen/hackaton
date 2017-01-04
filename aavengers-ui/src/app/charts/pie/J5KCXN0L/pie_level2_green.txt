@@ -1,0 +1,163 @@
+ {
+ 	type: "pie", 
+ 	title:{
+ 	  text: "Earnings Insights<br>Online Services",
+ 	  align: "right",
+ 	  fontColor: "#616161"
+ 	},
+ 	legend:{
+ 	  text:"%t<br>",
+ 	  width: 120,
+ 	  verticalAlign: "middle",
+ 	  borderWidth: 0,
+ 	  toggleAction: "remove",
+ 	  item:{
+ 	    padding: 5,
+      borderRadius: 3,
+      fontColor: "#fff",
+      align: "right",
+      width: 100
+ 	  },
+ 	  header:{
+ 	    text:"Online Services",
+ 	    align: "right",
+ 	    fontSize: 13,
+ 	    bold: true,
+ 	    fontColor: "#616161"
+ 	  },
+ 	  itemOff:{
+ 	    alpha: 0.7,
+ 	    textAlpha: 1,
+ 	    fontColor: "#616161",
+ 	    textDecoration: "line-through",
+ 	    lineWidth: 2
+ 	  },
+ 	  markerOff:{
+ 	    alpha: 0.2
+ 	  }
+ 	},
+ 	plot:{
+ 	  refAngle: 270,
+ 	  decimals: 0,
+ 	  thousandsSeparator: ",",
+ 	  valueBox:{
+ 	    decimals: 2
+ 	  },
+ 	  animation:{
+ 	    effect: 3,
+ 	    method: 1,
+ 	    sequence: 1,
+ 	    onLegendToggle: false
+ 	  }
+ 	},
+ 	tooltip:{
+ 	  text:"%t<br>$%v",
+ 	  placement: "node:out",
+ 	  offsetR: 10,
+ 	  width: 110,
+ 	  fontColor: "#fff",
+ 	  borderRadius: 3,
+ 	  bold: true,
+ 	  align: "right"
+  },
+  scale:{
+    sizeFactor: 0.75
+  },
+	series : [
+		{
+			values : [19357845],
+			text:"Search",
+			backgroundColor: "#00796B",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#00796B",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#00796B"
+			},
+			tooltip:{
+     	  		backgroundColor: "#00796B"
+     		}
+		},
+		{
+			values : [17568457],
+			text:"Cloud Storage",
+			backgroundColor: "#00897B",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#00897B",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#00897B"
+			},
+			tooltip:{
+     	  		backgroundColor: "#00897B"
+     		}
+		},
+		{
+			values : [12547845],
+			text:"Ad Revenue",
+			backgroundColor: "#009688",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#009688",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        backgroundColor: "#009688"
+			},
+			tooltip:{
+     	  		backgroundColor: "#009688"
+     		}
+		},
+		{
+			values : [7045987],
+			text:"Mobile Delivery",
+			backgroundColor: "#26A69A",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#26A69A",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        backgroundColor: "#26A69A"
+			},
+			tooltip:{
+     	  		backgroundColor: "#26A69A"
+     		}
+		},
+		{
+			values : [5576742],
+			text:"Developer Tools",
+			backgroundColor: "#4DB6AC",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#4DB6AC",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#4DB6AC"
+			},
+			tooltip:{
+     	  		backgroundColor: "#4DB6AC"
+     		}
+		}
+	]
+}

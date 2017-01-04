@@ -1,0 +1,163 @@
+  {
+ 	type: "pie", 
+ 	title:{
+ 	  text: "Earnings Insights<br>Business Division",
+ 	  align: "right",
+ 	  fontColor: "#616161"
+ 	},
+ 	legend:{
+ 	  text:"%t<br>",
+ 	  width: 120,
+ 	  verticalAlign: "middle",
+ 	  borderWidth: 0,
+ 	  toggleAction: "remove",
+ 	  item:{
+ 	    padding: 5,
+      borderRadius: 3,
+      fontColor: "#fff",
+      align: "right",
+      width: 100
+ 	  },
+ 	  header:{
+ 	    text:"Business<br>Products",
+ 	    align: "right",
+ 	    fontSize: 13,
+ 	    bold: true,
+ 	    fontColor: "#616161"
+ 	  },
+ 	  itemOff:{
+ 	    alpha: 0.7,
+ 	    textAlpha: 1,
+ 	    fontColor: "#616161",
+ 	    textDecoration: "line-through",
+ 	    lineWidth: 2
+ 	  },
+ 	  markerOff:{
+ 	    alpha: 0.2
+ 	  }
+ 	},
+ 	plot:{
+ 	  refAngle: 270,
+ 	  decimals: 0,
+ 	  thousandsSeparator: ",",
+ 	  valueBox:{
+ 	    decimals: 2
+ 	  },
+ 	  animation:{
+ 	    effect: 3,
+ 	    method: 1,
+ 	    sequence: 1,
+ 	    onLegendToggle: false
+ 	  }
+ 	},
+ 	tooltip:{
+ 	  text:"%t<br>$%v",
+ 	  placement: "node:out",
+ 	  offsetR: 10,
+ 	  width: 110,
+ 	  fontColor: "#fff",
+ 	  borderRadius: 3,
+ 	  bold: true,
+ 	  align: "right"
+  },
+  scale:{
+    sizeFactor: 0.75
+  },
+	series : [
+		{
+			values : [25684578],
+			text:"Enterprise",
+			backgroundColor: "#C2185B",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#C2185B",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#C2185B"
+			},
+			tooltip:{
+     	  		backgroundColor: "#C2185B"
+     		}
+		},
+		{
+			values : [19245687],
+			text:"Office Suites",
+			backgroundColor: "#D81B60",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#D81B60",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#D81B60"
+			},
+			tooltip:{
+     	  		backgroundColor: "#D81B60"
+     		}
+		},
+		{
+			values : [15457841], //
+			text:"Consulting",
+			backgroundColor: "#E91E63",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#E91E63",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        backgroundColor: "#E91E63"
+			},
+			tooltip:{
+     	  		backgroundColor: "#E91E63"
+     		}
+		},
+		{
+			values : [14985689],
+			text:"Mobile Products",
+			backgroundColor: "#EC407A",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#EC407A",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        backgroundColor: "#EC407A"
+			},
+			tooltip:{
+     	  		backgroundColor: "#EC407A"
+     		}
+		},
+		{
+			values : [10547780],
+			text:"Security",
+			backgroundColor: "#F06292",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#F06292",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#F06292"
+			},
+			tooltip:{
+     	  		backgroundColor: "#F06292"
+     		}
+		}
+	]
+}
