@@ -1,6 +1,5 @@
 import angular from 'angular';
 
-import {techsModule} from './app/techs/index';
 import 'angular-ui-router';
 import routesConfig from './routes';
 
@@ -13,7 +12,7 @@ import {chartsModule} from './app/charts/index';
 import './index.scss';
 
 angular
-  .module('app', [techsModule, chartsModule, 'ui.router'])
+  .module('app', [chartsModule, 'ui.router'])
   .config(routesConfig)
   .component('app', main)
   .component('fountainHeader', header)
