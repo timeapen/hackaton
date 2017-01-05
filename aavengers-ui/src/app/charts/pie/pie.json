@@ -66,7 +66,9 @@
         "thousandsSeparator": ",",
         "detach": false,
         "valueBox":{
-          "decimals": 2
+          "decimals": 1,
+          "fontSize": 16
+
         },
         "animation":{
           "effect": 2,

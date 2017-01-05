@@ -5,7 +5,7 @@ class PieController {
     $log.info('PIE');
 
     $http
-      .get('app/charts/pie.json')
+      .get('app/charts/pie/pie.json')
       .then(response => {
         this.chartData = response.data;
 
@@ -14,44 +14,53 @@ class PieController {
         colours.NEAR = '#0000FF';
         colours.SAFE = '#00FF00';
 
-        // const serverFirmId = '1234567890';
-        // @TODO: obtain from API
-        const serverAggregate = [{type: 'RISK', amount: 85948575}, {type: 'NEAR', amount: 119968796}, {type: 'SAFE', amount: 97503958}];
+        const id = '140735003';
+        const indicator = 'CORRUPTION';
 
-        const series = [];
-        angular.forEach(serverAggregate, (value => {
-          const type = value.type;
-          const colour = colours[type];
+        $http
+          .get('app/charts/pie/pie-aggregate.json')
+          .then(response => {
+            const serverAggregate = response.data;
 
-          const seriesItem = {};
-          seriesItem.values = [];
-          seriesItem.values.push(value.amount);
+            const series = [];
+            angular.forEach(serverAggregate, (value => {
+              const type = value.type;
+              const colour = colours[type];
 
-          seriesItem.url = "./app/charts/pie/data/pie_level2_red.txt?id=1234567890&type=RISK";
-          seriesItem.target = "graph";
-          seriesItem.text = "@ RISK!";
-          seriesItem.backgroundColor = colour;
-          seriesItem.legendText = "%t<br><b>$%v</b>";
+              const seriesItem = {};
+              seriesItem.values = [];
+              seriesItem.values.push(value.amount);
 
-          const legendMarker = {};
-          legendMarker.type = "circle";
-          legendMarker.size = 7;
-          legendMarker.borderColor = colour;
-          legendMarker.borderWidth = 4;
-          legendMarker.backgroundColor = "#FFF";
+              seriesItem.url = `//localhost:8080/gaia/portfolio/detailedRisk/${id}/${type}/${indicator}`;
+              $log.info('url: ', seriesItem.url);
 
-          seriesItem.legendMarker = legendMarker;
+              seriesItem.target = "graph";
+              seriesItem.text = value.title;
+              seriesItem.backgroundColor = colour;
+              seriesItem.legendText = "%t<br><b>$%v</b>";
 
-          const legendItem = {};
-          legendItem.backgroundColor = colour;
+              const legendMarker = {};
+              legendMarker.type = "circle";
+              legendMarker.size = 7;
+              legendMarker.borderColor = colour;
+              legendMarker.borderWidth = 4;
+              legendMarker.backgroundColor = "#FFF";
 
-          seriesItem.legendItem = legendItem;
+              seriesItem.legendMarker = legendMarker;
 
-          series.push(seriesItem);
-        }));
+              const legendItem = {};
+              legendItem.backgroundColor = colour;
 
-        angular.merge(this.chartData.graphset[0], {series});
-      });
+              seriesItem.legendItem = legendItem;
+
+              series.push(seriesItem);
+            }));
+
+            angular.merge(this.chartData.graphset[0], {series});
+          }
+        );
+      }
+    );
   }
 }
 

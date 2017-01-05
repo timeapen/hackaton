@@ -41,7 +41,8 @@
  	  decimals: 0,
  	  thousandsSeparator: ",",
  	  valueBox:{
- 	    decimals: 2
+ 	    decimals: 1,
+ 	    fontSize: 10
  	  },
  	  animation:{
  	    effect: 3,

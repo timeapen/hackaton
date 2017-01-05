@@ -1,12 +1,16 @@
 package com.aavengers.rest;
 
 import com.aavengers.CorruptionIndex;
+import com.aavengers.DetailedRisk;
 import com.aavengers.OverallRisk;
 import com.aavengers.Position;
 import com.aavengers.data.CorruptionIndexRepository;
 import com.aavengers.data.PositionRepository;
+import com.aavengers.service.DetailedRiskService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/portfolio")
+@CrossOrigin
 public class PortfolioController {
 
     @Autowired
@@ -27,6 +32,9 @@ public class PortfolioController {
     @Autowired
     CorruptionIndexRepository corruptionIndexRepository;
 
+    @Autowired
+    DetailedRiskService detailedRiskService;
+    
     @ResponseBody
     @GetMapping(value = "/positions/{accountNumber}", produces = "application/json")
     public List<Position> getIndicators(@PathVariable String accountNumber) {
@@ -60,4 +68,11 @@ public class PortfolioController {
 
         return new OverallRisk(data);
     }
+    
+    @ResponseBody
+    @GetMapping(value = "/detailedRisk/{accountNumber}/{type}/{indicator}", produces = "application/json")
+    public DetailedRisk getDetailedRisk(@PathVariable String accountNumber, @PathVariable String type, @PathVariable String indicator) {
+    	return detailedRiskService.detailedRiskForClient(accountNumber, type, indicator);
+    }
+    
 }

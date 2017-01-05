@@ -1,0 +1,132 @@
+{
+  "type": "pie",
+  "title": {
+    "text": "@ Risk Position",
+    "align": "right",
+    "fontColor": "#616161"
+  },
+  "legend": {
+    "verticalAlign": "middle",
+    "item": {
+      "padding": 5,
+      "borderRadius": 3,
+      "width": 100,
+      "align": "right",
+      "fontColor": "#fff"
+    },
+    "markerOff": {
+      "alpha": 0.2
+    },
+    "borderWidth": 0,
+    "width": 120,
+    "header": {
+      "fontSize": 13,
+      "text": "Total $",
+      "bold": true,
+      "align": "right",
+      "fontColor": "#616161"
+    },
+    "text": "%t<br>",
+    "toggleAction": "remove",
+    "itemOff": {
+      "alpha": 0.7,
+      "textDecoration": "line-through",
+      "textAlpha": 1,
+      "fontColor": "#616161",
+      "lineWidth": 2
+    }
+  },
+  "plot": {
+    "refAngle": 270,
+    "decimals": 0,
+    "valueBox": {
+      "decimals": 1,
+      "fontSize": 10
+    },
+    "thousandsSeparator": ",",
+    "animation": {
+      "sequence": 1,
+      "method": 1,
+      "effect": 3,
+      "onLegendToggle": false
+    }
+  },
+  "tooltip": {
+    "borderRadius": 3,
+    "width": 110,
+    "offsetR": 10,
+    "text": "%t<br>$%v",
+    "placement": "node:out",
+    "bold": true,
+    "align": "right",
+    "fontColor": "#fff"
+  },
+  "scale": {
+    "sizeFactor": 0.75
+  },
+  "series": [
+    {
+      "values": [
+        25684578
+      ],
+      "text": "Security #1",
+      "backgroundColor": "#FF005D",
+      "legendText": "%t<br><b>$%v</b>",
+      "legendMarker": {
+        "borderColor": "#FF005D",
+        "backgroundColor": "#fff",
+        "size": 7,
+        "borderWidth": 4,
+        "type": "circle"
+      },
+      "legendItem": {
+        "backgroundColor": "#FF005D"
+      },
+      "tooltip": {
+        "backgroundColor": "#FF005D"
+      }
+    },
+    {
+      "values": [
+        25684578
+      ],
+      "text": "Security #1",
+      "backgroundColor": "#FF005D",
+      "legendText": "%t<br><b>$%v</b>",
+      "legendMarker": {
+        "borderColor": "#FF005D",
+        "backgroundColor": "#fff",
+        "size": 7,
+        "borderWidth": 4,
+        "type": "circle"
+      },
+      "legendItem": {
+        "backgroundColor": "#FF005D"
+      },
+      "tooltip": {
+        "backgroundColor": "#FF005D"
+      }
+    },
+    {
+      "values": [
+        25684578
+      ],
+      "text": "Security #1",
+      "backgroundColor": "#FF005D",
+      "legendText": "%t<br><b>$%v</b>",
+      "legendMarker": {
+        "borderColor": "#FF005D",
+        "backgroundColor": "#fff",
+        "size": 7,
+        "borderWidth": 4,
+        "type": "circle"
+      },
+      "legendItem": {
+        "backgroundColor": "#FF005D"
+      },
+      "tooltip": {
+        "backgroundColor": "#FF005D"
+      }
+    }
+  ]
+}
