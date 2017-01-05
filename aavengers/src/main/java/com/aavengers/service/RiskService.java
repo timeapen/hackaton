@@ -5,6 +5,7 @@ import com.aavengers.IndicatorValue;
 import com.aavengers.OverallRisk;
 import com.aavengers.data.ConflictIndexRepository;
 import com.aavengers.data.CorruptionIndexRepository;
+import com.aavengers.data.FreedomIndexRepository;
 import com.aavengers.data.PositionRepository;
 import com.aavengers.entity.BaseIndex;
 import com.aavengers.entity.Position;
@@ -30,25 +31,33 @@ public class RiskService {
     ConflictIndexRepository conflictIndexRepository;
 
     @Autowired
+    FreedomIndexRepository freedomIndexRepository;
+
+    @Autowired
     ThresholdMappingService thresholdMappingService;
 
-    public OverallRisk getOverallRisk(String... accountNumbers) {
+    public OverallRisk getOverallRisk(int year, String... accountNumbers) {
 
         Map<IndicatorName, IndicatorValue> data = new HashMap<>();
         List<Position> positions = positionRepository.findByAcctNumIn(accountNumbers);
 
-        data.put(IndicatorName.Corruption, thresholdMappingService.mapToValue(IndicatorName.Corruption, getCorruptionIndexValue(positions)));
-        data.put(IndicatorName.Conflict, thresholdMappingService.mapToValue(IndicatorName.Conflict, getConflictIndexValue(positions)));
+        data.put(IndicatorName.Corruption, thresholdMappingService.mapToValue(IndicatorName.Corruption, getCorruptionIndexValue(year, positions)));
+        data.put(IndicatorName.Conflict, thresholdMappingService.mapToValue(IndicatorName.Conflict, getConflictIndexValue(year, positions)));
+        data.put(IndicatorName.Freedom, thresholdMappingService.mapToValue(IndicatorName.Freedom, getFreedomIndexValue(year, positions)));
 
         return new OverallRisk(data);
     }
 
-    private BigDecimal getCorruptionIndexValue(List<Position> positions) {
-        return averageValue(positions, corruptionIndexRepository.findByYear(2016));
+    private BigDecimal getCorruptionIndexValue(int year, List<Position> positions) {
+        return averageValue(positions, corruptionIndexRepository.findByYear(year));
     }
 
-    private BigDecimal getConflictIndexValue(List<Position> positions) {
-        return averageValue(positions, conflictIndexRepository.findByYear(2016));
+    private BigDecimal getConflictIndexValue(int year, List<Position> positions) {
+        return averageValue(positions, conflictIndexRepository.findByYear(year));
+    }
+
+    private BigDecimal getFreedomIndexValue(int year, List<Position> positions) {
+        return averageValue(positions, freedomIndexRepository.findByYear(year));
     }
 
     private BigDecimal averageValue(List<Position> positions, List<? extends BaseIndex> corruptionIdx) {

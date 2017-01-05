@@ -40,13 +40,13 @@ public class PortfolioController {
     @ResponseBody
     @GetMapping(value = "/overallRisk/{accountNumber}", produces = "application/json")
     public OverallRisk getOverallRisk(@PathVariable String accountNumber) {
-        return riskService.getOverallRisk(accountNumber.split("\\|"));
+        return riskService.getOverallRisk(2016, accountNumber.split("\\|"));
     }
     
     @ResponseBody
     @GetMapping(value = "/indicatorRisk/{indicator}/{accountNumber}", produces = "application/json")
     public List<IndicatorRisk> getIndicatorRisk(@PathVariable String indicator, @PathVariable String accountNumber) {
-        return indicatorRiskService.getIndicatorRisk(indicator, accountNumber.split("\\|"));
+        return indicatorRiskService.getIndicatorRisk(indicator, 2016, accountNumber.split("\\|"));
     }
     
     @ResponseBody

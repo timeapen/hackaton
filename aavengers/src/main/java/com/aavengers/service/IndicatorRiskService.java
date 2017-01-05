@@ -6,6 +6,7 @@ import com.aavengers.IndicatorValue;
 import com.aavengers.OverallRisk;
 import com.aavengers.data.ConflictIndexRepository;
 import com.aavengers.data.CorruptionIndexRepository;
+import com.aavengers.data.FreedomIndexRepository;
 import com.aavengers.data.PositionRepository;
 import com.aavengers.entity.BaseIndex;
 import com.aavengers.entity.CorruptionIndex;
@@ -34,9 +35,12 @@ public class IndicatorRiskService {
     ConflictIndexRepository conflictIndexRepository;
 
     @Autowired
+    FreedomIndexRepository freedomIndexRepository;
+
+    @Autowired
     ThresholdMappingService thresholdMappingService;
 
-    public List<IndicatorRisk> getIndicatorRisk(String indicatorName, String... accountNumbers) {
+    public List<IndicatorRisk> getIndicatorRisk(String indicatorName, int year, String... accountNumbers) {
     	
     	LinkedHashMap<IndicatorValue, BigDecimal> data = new LinkedHashMap<>();
         data.put(IndicatorValue.Poor, BigDecimal.ZERO);
@@ -50,8 +54,9 @@ public class IndicatorRiskService {
         IndicatorName indicator = IndicatorName.valueOf(indicatorName);
         
         Map<IndicatorName, List<? extends BaseIndex>> indexValues = new HashMap<>();
-        indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(2016));
-        indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(2016));
+        indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(year));
+        indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(year));
+        indexValues.put(IndicatorName.Freedom, freedomIndexRepository.findByYear(year));
         
         for(Position pos : positions) {
         	BigDecimal posIndicator = getIndicatorForPosition(indexValues.get(indicator), pos.getCountry());

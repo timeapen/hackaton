@@ -1,5 +1,5 @@
 package com.aavengers;
 
 public enum IndicatorName {
-    Corruption, Environment, Conflict, Other
+    Corruption, Environment, Conflict, Freedom
 }
