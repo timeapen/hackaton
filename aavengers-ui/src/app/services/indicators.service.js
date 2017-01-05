@@ -13,8 +13,8 @@ class Indicators {
     this.$log = $log;
   }
 
-  createRadarChartIndicators() {
-    this.$log.info("Generating radar chart indicators");
+  createRadarChartIndicators(companyId) {
+    this.$log.info("Generating radar chart indicators for company id: ", companyId);
 
     return this.getRadarChartFormat()
           .then(response => {
@@ -22,19 +22,21 @@ class Indicators {
 
             return this.getGaiaIndicators()
               .then(response => {
-                const indicators = response.data;
-                chartData["scale-k"].values = indicators.indicators;
-                chartData["scale-v"].values = indicators.valueThresholds;
+                const gaiaMeasures = response.data;
+                const indicators = gaiaMeasures.indicators;
+                this.$log.info("Gaia indicators: ", indicators);
+                chartData["scale-k"].values = indicators;
+                chartData["scale-v"].values = gaiaMeasures.valueThresholds;
 
-                return this.getRadarIndicatorScores()
+                return this.getRadarIndicatorScores(companyId)
                                 .then(response => {
                                   this.$log.info("Series Data: ", response.data);
-                                  const positionScores = response.data;
+                                  const riskScores = response.data.riskData;
 
                                   //  Colors on the radar chart should come from the server and be based on calculated risk factor
                                   return this.getRadarSeriesDataFormat()
                                    .then(response => {
-                                     chartData.series = this.createIndicatorScores(positionScores, response.data);
+                                     chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
 
                                      return chartData;
                                    });
@@ -43,17 +45,20 @@ class Indicators {
           });
   }
 
-  createIndicatorScores(positionScores, scoresFormat) {
+  createIndicatorScores(riskScores, indicators, scoresFormat) {
     const scoresData = [];
-    angular.forEach(positionScores, (score => {
-      const scoreChartData = {};
-      Object.assign(scoreChartData, scoresFormat);
 
-      scoreChartData.text = score.id;
-      scoreChartData.values = score.values;
+    const scoreChartData = {};
+    Object.assign(scoreChartData, scoresFormat);
+    scoreChartData.text = 'Company Id';
 
-      scoresData.push(scoreChartData);
+    const chartRiskScores = [];
+    angular.forEach(indicators, (indicator => {
+      chartRiskScores.push(riskScores[indicator]);
     }));
+    scoreChartData.values = chartRiskScores;
+
+    scoresData.push(scoreChartData);
     return scoresData;
   }
 
@@ -67,24 +72,14 @@ class Indicators {
               .get(`http://${serverDomain}/indicators`);
   }
 
-  getRadarIndicatorScores() {
+  getRadarIndicatorScores(companyId) {
     return this.$http
-      .get('app/charts/radar-mock-indicator-scores.json');
+      .get(`http://${serverDomain}/portfolio/overallRisk/${companyId}`);
   }
 
   getRadarSeriesDataFormat() {
     return this.$http
      .get('app/charts/radar-series.json');
-  }
-
-  addRadarIndices(chartData) {
-    const gaiaIndices = ["Quality", "Efficiency", "Satisfaction", "Value", "Cost"];
-    chartData["scale-k"].values = gaiaIndices;
-  }
-
-  addRadarIndexRatings(chartData) {
-    const gaiaIndexRatings = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
-    chartData["scale-v"].values = gaiaIndexRatings;
   }
 
   createPieChart(accountId, indicator) {
