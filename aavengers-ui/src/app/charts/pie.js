@@ -7,7 +7,7 @@ class PieController {
   /** @ngInject */
   constructor($http, $log, indicators) {
     $log.info('PIE Controller');
-    indicators.getPieChartIndicators(accountId, indicator)
+    indicators.createPieChart(accountId, indicator)
      .then(response => {
        this.chartData = response;
      });

@@ -13,7 +13,7 @@ class Indicators {
     this.$log = $log;
   }
 
-  getRadarChartIndicators() {
+  createRadarChartIndicators() {
     this.$log.info("Generating radar chart indicators");
 
     return this.$http
@@ -21,8 +21,8 @@ class Indicators {
           .then(response => {
             const chartData = response.data;
 
-            addRadarIndices(chartData);
-            addRadarIndexRatings(chartData);
+            this.addRadarIndices(chartData);
+            this.addRadarIndexRatings(chartData);
 
             return this.$http
               .get('app/charts/radar-mock-series-data.json')
@@ -52,7 +52,17 @@ class Indicators {
           });
   }
 
-  getPieChartIndicators(accountId, indicator) {
+  addRadarIndices(chartData) {
+    const gaiaIndices = ["Quality", "Efficiency", "Satisfaction", "Value", "Cost"];
+    chartData["scale-k"].values = gaiaIndices;
+  }
+
+  addRadarIndexRatings(chartData) {
+    const gaiaIndexRatings = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
+    chartData["scale-v"].values = gaiaIndexRatings;
+  }
+
+  createPieChart(accountId, indicator) {
     this.$log.info("Generating pie chart indicators");
 
     return this.$http
@@ -69,7 +79,7 @@ class Indicators {
 
             const series = [];
             angular.forEach(serverAggregate, (value => {
-              series.push(createPieSeriesItem(value, accountId, indicator));
+              series.push(this.createPieSeriesItem(value, accountId, indicator));
             }));
 
             angular.merge(chartData.graphset[0], {series});
@@ -79,51 +89,40 @@ class Indicators {
       }
     );
   }
+
+  createPieSeriesItem(position, accountId, indicator) {
+    const type = position.type;
+    const colour = colours[type];
+
+    const seriesItem = {};
+    seriesItem.values = [];
+    seriesItem.values.push(position.amount);
+
+    // URL for drill down pie chart
+    seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${accountId}/${type}/${indicator}`;
+
+    seriesItem.target = "graph";
+    seriesItem.text = position.title;
+    seriesItem.backgroundColor = colour;
+    seriesItem.legendText = "%t<br><b>$%v</b>";
+
+    const legendMarker = {};
+    legendMarker.type = "circle";
+    legendMarker.size = 7;
+    legendMarker.borderColor = colour;
+    legendMarker.borderWidth = 4;
+    legendMarker.backgroundColor = "#FFF";
+
+    seriesItem.legendMarker = legendMarker;
+
+    const legendItem = {};
+    legendItem.backgroundColor = colour;
+
+    seriesItem.legendItem = legendItem;
+
+    return seriesItem;
+  }
 }
-
-function addRadarIndices(chartData) {
-  const gaiaIndices = ["Quality", "Efficiency", "Satisfaction", "Value", "Cost"];
-  chartData["scale-k"].values = gaiaIndices;
-}
-
-function addRadarIndexRatings(chartData) {
-  const gaiaIndexRatings = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
-  chartData["scale-v"].values = gaiaIndexRatings;
-}
-
-function createPieSeriesItem(position, accountId, indicator) {
-  const type = position.type;
-  const colour = colours[type];
-
-  const seriesItem = {};
-  seriesItem.values = [];
-  seriesItem.values.push(position.amount);
-
-  // URL for drill down pie chart
-  seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${accountId}/${type}/${indicator}`;
-
-  seriesItem.target = "graph";
-  seriesItem.text = position.title;
-  seriesItem.backgroundColor = colour;
-  seriesItem.legendText = "%t<br><b>$%v</b>";
-
-  const legendMarker = {};
-  legendMarker.type = "circle";
-  legendMarker.size = 7;
-  legendMarker.borderColor = colour;
-  legendMarker.borderWidth = 4;
-  legendMarker.backgroundColor = "#FFF";
-
-  seriesItem.legendMarker = legendMarker;
-
-  const legendItem = {};
-  legendItem.backgroundColor = colour;
-
-  seriesItem.legendItem = legendItem;
-
-  return seriesItem;
-}
-
 export default angular.module('services.indicators', [])
   .service('indicators', Indicators)
   .name;

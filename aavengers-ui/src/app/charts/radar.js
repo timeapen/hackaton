@@ -3,7 +3,7 @@ class RadarController {
   constructor($http, $log, indicators) {
     $log.info('RADAR Controller');
 
-    indicators.getRadarChartIndicators()
+    indicators.createRadarChartIndicators()
      .then(response => {
        this.chartData = response;
      });
