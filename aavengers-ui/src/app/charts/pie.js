@@ -1,6 +1,6 @@
 // Constants should be eventually pulled out into configuration data, retrieved from the server
 const accountId = '140735003';
-const indicator = 'CORRUPTION';
+const indicator = 'Corruption';
 
 class PieController {
 
