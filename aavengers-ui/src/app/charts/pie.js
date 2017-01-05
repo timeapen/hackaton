@@ -4,7 +4,10 @@ class PieController {
   constructor($http, $log) {
     $log.info('PIE');
 
+    const serverDomain = '//localhost:8080/gaia';
+
     $http
+      // obtain the Pie chart configuration from json on web server, series data comes from backend call
       .get('app/charts/pie/pie.json')
       .then(response => {
         this.chartData = response.data;
@@ -18,6 +21,7 @@ class PieController {
         const indicator = 'CORRUPTION';
 
         $http
+          // series data from backend
           .get('app/charts/pie/pie-aggregate.json')
           .then(response => {
             const serverAggregate = response.data;
@@ -31,7 +35,8 @@ class PieController {
               seriesItem.values = [];
               seriesItem.values.push(value.amount);
 
-              seriesItem.url = `//localhost:8080/gaia/portfolio/detailedRisk/${id}/${type}/${indicator}`;
+              // URL for drill down pie chart
+              seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${id}/${type}/${indicator}`;
               $log.info('url: ', seriesItem.url);
 
               seriesItem.target = "graph";
