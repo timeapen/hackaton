@@ -17,7 +17,7 @@ public class ThresholdMappingService {
         valueThresholds.put(new BigDecimal(20), IndicatorValue.Poor);
         valueThresholds.put(new BigDecimal(40), IndicatorValue.Fair);
         valueThresholds.put(new BigDecimal(60), IndicatorValue.Good);
-        valueThresholds.put(new BigDecimal(80), IndicatorValue.Very_Good);
+        valueThresholds.put(new BigDecimal(80), IndicatorValue.VeryGood);
         valueThresholds.put(new BigDecimal(100), IndicatorValue.Excellent);
     }
 

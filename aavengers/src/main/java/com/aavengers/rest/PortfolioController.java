@@ -7,6 +7,7 @@ import com.aavengers.data.PositionRepository;
 import com.aavengers.entity.BaseIndex;
 import com.aavengers.entity.Position;
 import com.aavengers.service.DetailedRiskService;
+import com.aavengers.service.IndicatorRiskService;
 import com.aavengers.service.RiskService;
 import com.aavengers.service.ThresholdMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,21 @@ public class PortfolioController {
     RiskService riskService;
 
     @Autowired
+    IndicatorRiskService indicatorRiskService;
+
+    @Autowired
     DetailedRiskService detailedRiskService;
 
     @ResponseBody
     @GetMapping(value = "/overallRisk/{accountNumber}", produces = "application/json")
     public OverallRisk getOverallRisk(@PathVariable String accountNumber) {
         return riskService.getOverallRisk(accountNumber.split("\\|"));
+    }
+    
+    @ResponseBody
+    @GetMapping(value = "/indicatorRisk/{indicator}/{accountNumber}", produces = "application/json")
+    public List<IndicatorRisk> getIndicatorRisk(@PathVariable String indicator, @PathVariable String accountNumber) {
+        return indicatorRiskService.getIndicatorRisk(indicator, accountNumber.split("\\|"));
     }
     
     @ResponseBody

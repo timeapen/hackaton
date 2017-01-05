@@ -6,6 +6,9 @@ class PieController {
 
     const serverDomain = '//localhost:8080/gaia';
 
+    const id = '000133190USD|140735003';
+    const indicator = 'Corruption';
+
     $http
       // obtain the Pie chart configuration from json on web server, series data comes from backend call
       .get('app/charts/pie/pie.json')
@@ -13,16 +16,15 @@ class PieController {
         this.chartData = response.data;
 
         const colours = {};
-        colours.RISK = '#FF0000';
-        colours.NEAR = '#0000FF';
-        colours.SAFE = '#00FF00';
-
-        const id = '140735003';
-        const indicator = 'CORRUPTION';
+        colours.Poor = '#F93F26';
+        colours.Fair = '#FFD129';
+        colours.Good = '#008500';
+        colours.VeryGood = '#6AADE4';
+        colours.Excellent = '#002888';
 
         $http
           // series data from backend
-          .get('app/charts/pie/pie-aggregate.json')
+          .get(`${serverDomain}/portfolio/indicatorRisk/${indicator}/${id}`)
           .then(response => {
             const serverAggregate = response.data;
 

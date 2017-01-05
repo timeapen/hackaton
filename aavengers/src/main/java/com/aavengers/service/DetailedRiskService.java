@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.aavengers.DetailedRisk;
 import com.aavengers.DetailedSeries;
+import com.aavengers.IndicatorValue;
 import com.aavengers.data.PositionRepository;
 
 @Service
@@ -21,29 +22,18 @@ public class DetailedRiskService {
 
     @SuppressWarnings("serial")
 	Map<String, String> title = new HashMap<String, String>() {{
-    	put(RiskType.RISK.getRiskType(), "@ Risk Positions");
-    	put(RiskType.NEAR.getRiskType(), "@ Near Risk Positions");
-    	put(RiskType.SAFE.getRiskType(), "Safe Positions");
+    	put(IndicatorValue.Poor.name(), IndicatorValue.Poor.title());
+    	put(IndicatorValue.Fair.name(), IndicatorValue.Fair.title());
+    	put(IndicatorValue.Good.name(), IndicatorValue.Good.title());
+    	put(IndicatorValue.VeryGood.name(), IndicatorValue.VeryGood.title());
+    	put(IndicatorValue.Excellent.name(), IndicatorValue.Excellent.title());
     }};
     
-    public String getTitle(String type) {
+    private String getTitle(String type) {
     	if(StringUtils.isEmpty(type)) {
     		return "Position";
     	}
-    	return title.get(type.toUpperCase());
-    }
-    
-    public enum RiskType {
-    	RISK("RISK"), NEAR("NEAR"), SAFE("SAFE");
-    	
-    	private String riskType;
-    	RiskType(String riskType) {
-    		this.riskType = riskType;
-    	}
-    	
-    	String getRiskType() {
-    		return riskType;
-    	}
+    	return title.get(type);
     }
     
     public class HTMLColour {
@@ -57,10 +47,23 @@ public class DetailedRiskService {
     		this.blue = blue;
     	}
     	
+    	public void incrementColour(int incrementAll) {
+    		incrementColour(incrementAll, incrementAll, incrementAll);
+    	}
+    	
     	public void incrementColour(int red, int green, int blue) {
-    		this.red += red;
-    		this.green += green;
-    		this.blue += blue;
+    		this.red = increment(this.red, red);
+    		this.green = increment(this.green, green);
+    		this.blue = increment(this.blue, blue);
+    	}
+    	
+    	private int increment(int current, int increment) {
+    		int RGB_MAX = 255;
+    		int sum = current + increment;
+    		if(sum > RGB_MAX) {
+    			return RGB_MAX;
+    		}
+    		return sum;
     	}
     	
     	public String getHex() {
@@ -80,9 +83,11 @@ public class DetailedRiskService {
 		
 	    @SuppressWarnings("serial")
 		Map<String, HTMLColour> colours = new HashMap<String, HTMLColour>() {{
-	    	put(RiskType.RISK.getRiskType(), new HTMLColour(255, 0, 0));
-	    	put(RiskType.NEAR.getRiskType(), new HTMLColour(0, 0, 255));
-	    	put(RiskType.SAFE.getRiskType(), new HTMLColour(0, 255, 0));
+	    	put(IndicatorValue.Poor.name(), new HTMLColour(249, 63, 38));
+	    	put(IndicatorValue.Fair.name(), new HTMLColour(254, 223, 1));
+	    	put(IndicatorValue.Good.name(), new HTMLColour(0, 133, 0));
+	    	put(IndicatorValue.VeryGood.name(), new HTMLColour(106, 173, 228));
+	    	put(IndicatorValue.Excellent.name(), new HTMLColour(0, 40, 136));
 	    }};
 	    
 		
@@ -171,34 +176,25 @@ public class DetailedRiskService {
 		
 		List<DetailedSeries> series = new ArrayList<DetailedSeries>();
 		
-		int stepColour = 30;
+		int incrementColour = 20;
 		// @TODO: RG, replace with values from data store
 		for(int i=0; i < 3; i++) {
 			
 			// calculate the colour shade, each slice of the inner pie is of the same base colour with a variation on shading
 			HTMLColour htmlColour = colours.get(type);
+			htmlColour.incrementColour(incrementColour);
 			String colour = htmlColour.getHex();
-			
-			if(type.equalsIgnoreCase(RiskType.RISK.getRiskType())) {
-				htmlColour.incrementColour(0, (i*stepColour), (i*stepColour));
-			}
-			else if(type.equalsIgnoreCase(RiskType.NEAR.getRiskType())) {
-				htmlColour.incrementColour((i*stepColour), (i*stepColour), 0);
-			}
-			else if(type.equalsIgnoreCase(RiskType.SAFE.getRiskType())) {
-				htmlColour.incrementColour((i*stepColour), 0, (i*stepColour));
-			}
-			colour = htmlColour.getHex();
 			
 			// create the series data to add to the series list of data
 			DetailedSeries seriesItem = new DetailedSeries();
 			
 			List<Long> values = new ArrayList<Long>();
 			// @TODO: RG, obtain the total amount of particular security
-			values.add(new Long(25684578));
+			values.add(new Long(25684578*(i+1)));
 			seriesItem.setValues(values);
 			
-			seriesItem.setText("Security #1");
+			// @TODO: RG, obtain the security name
+			seriesItem.setText("Security #" + (i+1));
 			seriesItem.setBackgroundColor(colour);
 			seriesItem.setLegendText("%t<br><b>$%v</b>");
 			
@@ -213,7 +209,7 @@ public class DetailedRiskService {
 			Map<String, Object> legendMarker = new HashMap<String, Object>();
 			legendMarker.put("type", "circle");
 			legendMarker.put("size", new Integer(7));
-			legendMarker.put("borderColor", "#FF005D");
+			legendMarker.put("borderColor", colour);
 			legendMarker.put("borderWidth", new Integer(4));
 			legendMarker.put("backgroundColor", "#fff");
 			
