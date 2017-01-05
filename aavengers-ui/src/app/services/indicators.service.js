@@ -86,15 +86,11 @@ class Indicators {
   createPieChart(accountId, indicator) {
     this.$log.info("Generating pie chart indicators");
 
-    return this.$http
-      // obtain the Pie chart configuration from json on web server, series data comes from backend call
-      .get('app/charts/pie/pie.json')
+    return this.getPieChartFormat()
       .then(response => {
         const chartData = response.data;
 
-        return this.$http
-          // series data from backend
-          .get(`${serverDomain}/portfolio/indicatorRisk/${indicator}/${accountId}`)
+        return this.getIndicatorRiskData(accountId, indicator)
           .then(response => {
             const serverAggregate = response.data;
 
@@ -109,6 +105,18 @@ class Indicators {
         );
       }
     );
+  }
+
+  getPieChartFormat() {
+    // obtain the Pie chart configuration from json on web server, series data comes from backend call
+    return this.$http
+              .get('app/charts/pie/pie.json');
+  }
+
+  getIndicatorRiskData(accountId, indicator) {
+    return this.$http
+            // series data from backend
+            .get(`${serverDomain}/portfolio/indicatorRisk/${indicator}/${accountId}`);
   }
 
   createPieSeriesItem(position, accountId, indicator) {
