@@ -2,7 +2,7 @@ import angular from 'angular';
 
 // Constants should be eventually pulled out into configuration data, retrieved from the server
 const serverDomain = '//localhost:8080/gaia';
-const colours = {RISK: '#FF0000', NEAR: '#0000FF', SAFE: '#00FF00'};
+const colours = {Poor: '#F93F26', Fair: '#FFD129', Good: '#008500', VeryGood: '#6AADE4', Excellent: '#002888'};
 
 class Indicators {
 
@@ -24,7 +24,7 @@ class Indicators {
 
         return this.$http
           // series data from backend
-          .get('app/charts/pie/pie-aggregate.json')
+          .get(`${serverDomain}/portfolio/indicatorRisk/${indicator}/${accountId}`)
           .then(response => {
             const serverAggregate = response.data;
 
