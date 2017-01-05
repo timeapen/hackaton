@@ -13,6 +13,45 @@ class Indicators {
     this.$log = $log;
   }
 
+  getRadarChartIndicators() {
+    this.$log.info("Generating radar chart indicators");
+
+    return this.$http
+          .get('app/charts/radar.json')
+          .then(response => {
+            const chartData = response.data;
+
+            addRadarIndices(chartData);
+            addRadarIndexRatings(chartData);
+
+            return this.$http
+              .get('app/charts/radar-mock-series-data.json')
+              .then(response => {
+                this.$log.info("Series Data: ", response.data);
+                const positionScores = response.data;
+
+                //  Colors on the radar chart should come from the server and be based on calculated risk factor
+                return this.$http
+                 .get('app/charts/radar-series.json')
+                 .then(response => {
+                   const scoresData = [];
+                   angular.forEach(positionScores, (score => {
+                     const scoreChartData = {};
+                     Object.assign(scoreChartData, response.data);
+
+                     scoreChartData.text = score.id;
+                     scoreChartData.values = score.values;
+
+                     scoresData.push(scoreChartData);
+                   }));
+                   chartData.series = scoresData;
+
+                   return chartData;
+                 });
+              });
+          });
+  }
+
   getPieChartIndicators(accountId, indicator) {
     this.$log.info("Generating pie chart indicators");
 
@@ -40,6 +79,16 @@ class Indicators {
       }
     );
   }
+}
+
+function addRadarIndices(chartData) {
+  const gaiaIndices = ["Quality", "Efficiency", "Satisfaction", "Value", "Cost"];
+  chartData["scale-k"].values = gaiaIndices;
+}
+
+function addRadarIndexRatings(chartData) {
+  const gaiaIndexRatings = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
+  chartData["scale-v"].values = gaiaIndexRatings;
 }
 
 function createPieSeriesItem(position, accountId, indicator) {

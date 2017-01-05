@@ -9,7 +9,6 @@ class PieController {
     $log.info('PIE Controller');
     indicators.getPieChartIndicators(accountId, indicator)
      .then(response => {
-       $log.info("Retrieved chart data response: ", response);
        this.chartData = response;
      });
   }
