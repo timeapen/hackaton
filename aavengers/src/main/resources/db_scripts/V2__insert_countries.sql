@@ -1,5 +1,4 @@
-
-CREATE TABLE  Country (
+CREATE TABLE Country (
      code   char (3) NOT NULL,
      name   varchar (50) NOT NULL
 );
@@ -173,7 +172,7 @@ INSERT INTO Country (name, code) values ('Norway','NO ');
 INSERT INTO Country (name, code) values ('Oman','OM ');
 INSERT INTO Country (name, code) values ('Pakistan','PK ');
 INSERT INTO Country (name, code) values ('Palau','PW ');
-INSERT INTO Country (name, code) values ('Palestinian Territory, Occupied','PS ');
+INSERT INTO Country (name, code) values ('Palestinian','PS ');
 INSERT INTO Country (name, code) values ('Panama','PA ');
 INSERT INTO Country (name, code) values ('Papua New Guinea','PG ');
 INSERT INTO Country (name, code) values ('Paraguay','PY ');
@@ -214,15 +213,15 @@ INSERT INTO Country (name, code) values ('South Sudan','SS ');
 INSERT INTO Country (name, code) values ('Spain','ES ');
 INSERT INTO Country (name, code) values ('Sri Lanka','LK ');
 INSERT INTO Country (name, code) values ('Sudan','SD ');
-INSERT INTO Country (name, code) values ('Suriname *','SR ');
+INSERT INTO Country (name, code) values ('Suriname','SR ');
 INSERT INTO Country (name, code) values ('Svalbard and Jan Mayen Islands','SJ ');
 INSERT INTO Country (name, code) values ('Swaziland','SZ ');
 INSERT INTO Country (name, code) values ('Sweden','SE ');
 INSERT INTO Country (name, code) values ('Switzerland','CH ');
-INSERT INTO Country (name, code) values ('Syrian Arab Republic (Syria)','SY ');
+INSERT INTO Country (name, code) values ('Syria','SY ');
 INSERT INTO Country (name, code) values ('Taiwan, Republic of China','TW ');
 INSERT INTO Country (name, code) values ('Tajikistan','TJ ');
-INSERT INTO Country (name, code) values ('Tanzania *, United Republic of','TZ ');
+INSERT INTO Country (name, code) values ('Tanzania, United Republic of','TZ ');
 INSERT INTO Country (name, code) values ('Thailand','TH ');
 INSERT INTO Country (name, code) values ('Timor-Leste','TL ');
 INSERT INTO Country (name, code) values ('Togo','TG ');
@@ -243,8 +242,8 @@ INSERT INTO Country (name, code) values ('United States Minor Outlying Islands',
 INSERT INTO Country (name, code) values ('Uruguay','UY ');
 INSERT INTO Country (name, code) values ('Uzbekistan','UZ ');
 INSERT INTO Country (name, code) values ('Vanuatu','VU ');
-INSERT INTO Country (name, code) values ('Venezuela (Bolivarian Republic of)','VE ');
-INSERT INTO Country (name, code) values ('Viet Nam','VN ');
+INSERT INTO Country (name, code) values ('Venezuela','VE ');
+INSERT INTO Country (name, code) values ('Vietnam','VN ');
 INSERT INTO Country (name, code) values ('Virgin Islands, US','VI ');
 INSERT INTO Country (name, code) values ('Wallis and Futuna Islands','WF ');
 INSERT INTO Country (name, code) values ('Western Sahara','EH ');

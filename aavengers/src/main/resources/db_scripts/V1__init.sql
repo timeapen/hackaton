@@ -1,6 +1,6 @@
 
-CREATE TABLE  ACHD_App (
-    id bigint auto_increment,
+CREATE TABLE ACHD_App (
+     id bigint auto_increment,
      Bank_Cd_KEY   char (8) NOT NULL,
      Acct_Num_KEY   char (35) NOT NULL,
      Loc_Sec_Num_KEY   char (12) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE  ACHD_App (
      ArchiveTimeStamp   datetime  NOT NULL
 );
 
-CREATE TABLE  ACHS_App (
+CREATE TABLE ACHS_App (
     id bigint auto_increment,
      Bank_Cd_KEY   char (8) NOT NULL,
      Acct_Num_KEY   char (35) NOT NULL,
