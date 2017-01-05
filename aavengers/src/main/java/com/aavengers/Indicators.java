@@ -1,22 +1,19 @@
 package com.aavengers;
 
-/**
- * Created by admin on 2017-01-04.
- */
 public class Indicators {
-    String[] indicators;
-    String[] valueTresholds;
+    IndicatorName[] indicators;
+    IndicatorValue[] valueThresholds;
 
-    public Indicators(String[] indicators, String[] valueTresholds) {
+    public Indicators(IndicatorName[] indicators, IndicatorValue[] valueThresholds) {
         this.indicators = indicators;
-        this.valueTresholds = valueTresholds;
+        this.valueThresholds = valueThresholds;
     }
 
-    public String[] getIndicators() {
+    public IndicatorName[] getIndicators() {
         return indicators;
     }
 
-    public String[] getValueTresholds() {
-        return valueTresholds;
+    public IndicatorValue[] getValueThresholds() {
+        return valueThresholds;
     }
 }

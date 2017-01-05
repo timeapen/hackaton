@@ -4,13 +4,13 @@ package com.aavengers;
 import java.util.Map;
 
 public class OverallRisk {
-    Map<String, String> riskData;
+    Map<IndicatorName, IndicatorValue> riskData;
 
-    public OverallRisk(Map<String, String> riskData) {
+    public OverallRisk(Map<IndicatorName, IndicatorValue> riskData) {
         this.riskData = riskData;
     }
 
-    public Map<String, String> getRiskData() {
+    public Map<IndicatorName, IndicatorValue> getRiskData() {
         return riskData;
     }
 }

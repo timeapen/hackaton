@@ -1,13 +1,14 @@
 package com.aavengers.rest;
 
-import com.aavengers.CorruptionIndex;
-import com.aavengers.DetailedRisk;
-import com.aavengers.OverallRisk;
-import com.aavengers.Position;
+import com.aavengers.*;
+import com.aavengers.data.ConflictIndexRepository;
 import com.aavengers.data.CorruptionIndexRepository;
 import com.aavengers.data.PositionRepository;
+import com.aavengers.entity.BaseIndex;
+import com.aavengers.entity.Position;
 import com.aavengers.service.DetailedRiskService;
-
+import com.aavengers.service.RiskService;
+import com.aavengers.service.ThresholdMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,46 +28,15 @@ import java.util.Map;
 public class PortfolioController {
 
     @Autowired
-    PositionRepository positionRepository;
-
-    @Autowired
-    CorruptionIndexRepository corruptionIndexRepository;
+    RiskService riskService;
 
     @Autowired
     DetailedRiskService detailedRiskService;
-    
-    @ResponseBody
-    @GetMapping(value = "/positions/{accountNumber}", produces = "application/json")
-    public List<Position> getIndicators(@PathVariable String accountNumber) {
-        return positionRepository.findByAcctNum(accountNumber);
-    }
 
     @ResponseBody
     @GetMapping(value = "/overallRisk/{accountNumber}", produces = "application/json")
     public OverallRisk getOverallRisk(@PathVariable String accountNumber) {
-
-        Map<String, String> data = new HashMap<>();
-        Map<String, BigDecimal> corruptionIdxMap = new HashMap<>();
-        List<Position> positions = positionRepository.findByAcctNum(accountNumber);
-        List<CorruptionIndex> corruptionIdx = corruptionIndexRepository.findByYear(2016);
-        BigDecimal calculatedTotal = BigDecimal.ZERO;
-        BigDecimal totalMarketValue = BigDecimal.ZERO;
-
-
-        for(CorruptionIndex idx : corruptionIdx) {
-            corruptionIdxMap.put(idx.getCountry(), new BigDecimal(idx.getVal()));
-        }
-
-        for(Position pos : positions) {
-            BigDecimal posCorruptionIdx = corruptionIdxMap.get(pos.getCountry().getCode());
-            calculatedTotal = calculatedTotal.add(posCorruptionIdx.multiply(pos.getMktVal()));
-            totalMarketValue = totalMarketValue.add(pos.getMktVal());
-        }
-
-        BigDecimal corruptionIdxValue = calculatedTotal.divide(totalMarketValue);
-
-
-        return new OverallRisk(data);
+        return riskService.getOverallRisk(accountNumber.split("\\|"));
     }
     
     @ResponseBody

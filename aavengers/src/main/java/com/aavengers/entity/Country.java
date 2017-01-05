@@ -1,4 +1,4 @@
-package com.aavengers;
+package com.aavengers.entity;
 
 
 import javax.persistence.*;

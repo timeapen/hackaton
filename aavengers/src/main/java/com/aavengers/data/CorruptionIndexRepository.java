@@ -1,7 +1,6 @@
 package com.aavengers.data;
 
-import com.aavengers.CorruptionIndex;
-import com.aavengers.Position;
+import com.aavengers.entity.CorruptionIndex;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

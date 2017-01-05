@@ -1,6 +1,6 @@
 package com.aavengers.data;
 
-import com.aavengers.Position;
+import com.aavengers.entity.Position;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

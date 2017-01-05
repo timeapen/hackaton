@@ -1,11 +1,10 @@
-package com.aavengers;
+package com.aavengers.entity;
 
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "CORRUPTION_INDEX")
-public class CorruptionIndex {
+@MappedSuperclass
+public abstract class BaseIndex {
 
     @Id @GeneratedValue
     Long id;

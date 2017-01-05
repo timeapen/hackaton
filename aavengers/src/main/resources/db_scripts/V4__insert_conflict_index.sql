@@ -58,7 +58,7 @@ INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BR ', 2015
 INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BR ', 2016, 41.81);
 INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BT ', 2014, 38.62); 
 INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BT ', 2015, 37.75); 
-INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BT ', 2016, 36.6
+INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BT ', 2016, 36.6);
 INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BW ', 2014, 35.34); 
 INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BW ', 2015, 33.95); 
 INSERT INTO CONFLICT_INDEX (country_code, idx_year, idx_val) VALUES ('BW ', 2016, 33.91);
