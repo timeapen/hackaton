@@ -3,13 +3,11 @@ package com.aavengers.service;
 import com.aavengers.IndicatorName;
 import com.aavengers.IndicatorRisk;
 import com.aavengers.IndicatorValue;
-import com.aavengers.OverallRisk;
 import com.aavengers.data.ConflictIndexRepository;
 import com.aavengers.data.CorruptionIndexRepository;
 import com.aavengers.data.FreedomIndexRepository;
 import com.aavengers.data.PositionRepository;
 import com.aavengers.entity.BaseIndex;
-import com.aavengers.entity.CorruptionIndex;
 import com.aavengers.entity.Country;
 import com.aavengers.entity.Position;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +70,6 @@ public class IndicatorRiskService {
         	
         	if(e.getValue().intValue() == 0) {
         		// @TODO: RG, remove
-            	result.add(new IndicatorRisk(e.getKey(), new BigDecimal(20000000)));
         		continue;
         	}
         	

@@ -1,5 +1,6 @@
 package com.aavengers.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,14 +12,32 @@ import org.springframework.util.StringUtils;
 
 import com.aavengers.DetailedRisk;
 import com.aavengers.DetailedSeries;
+import com.aavengers.IndicatorName;
 import com.aavengers.IndicatorValue;
+import com.aavengers.data.ConflictIndexRepository;
+import com.aavengers.data.CorruptionIndexRepository;
+import com.aavengers.data.FreedomIndexRepository;
 import com.aavengers.data.PositionRepository;
+import com.aavengers.entity.BaseIndex;
+import com.aavengers.entity.Position;
 
 @Service
 public class DetailedRiskService {
 
     @Autowired
     PositionRepository positionRepository;
+    
+    @Autowired
+    CorruptionIndexRepository corruptionIndexRepository;
+
+    @Autowired
+    ConflictIndexRepository conflictIndexRepository;
+
+    @Autowired
+    FreedomIndexRepository freedomIndexRepository;
+
+    @Autowired
+    ThresholdMappingService thresholdMappingService;
 
     @SuppressWarnings("serial")
 	Map<String, String> title = new HashMap<String, String>() {{
@@ -79,7 +98,7 @@ public class DetailedRiskService {
      * @param indicator the attribute of calculation (ex. Corruption, Environmental, Corporate Governence, Liquidity, etc.)
      * @return DetailedRisk that comprises all the securities
      */
-	public DetailedRisk detailedRiskForClient(String accountNumber, String type, String indicator) {
+	public DetailedRisk detailedRiskForClient(IndicatorName indicator, IndicatorValue type, int year, String... accountNumbers) {
 		
 	    @SuppressWarnings("serial")
 		Map<String, HTMLColour> colours = new HashMap<String, HTMLColour>() {{
@@ -91,14 +110,28 @@ public class DetailedRiskService {
 	    }};
 	    
 		
-	    // @TODO: RG, obtain data from backend
+	    List<Position> positions = positionRepository.findByAcctNumIn(accountNumbers);
+	    
+	    Map<IndicatorName, List<? extends BaseIndex>> indexValues = new HashMap<>();
+        indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(year));
+        indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(year));
+        indexValues.put(IndicatorName.Freedom, freedomIndexRepository.findByYear(year));
+        
+        List<? extends BaseIndex> indicatorList = indexValues.get(indicator);
+        
+        List<Position> result = new ArrayList<>();
+        for(Position pos : positions) {
+        	if(type.equals(getIndicatorValueForPosition(indicator, indicatorList, pos))){
+        		result.add(pos);
+        	}
+        }
 	    
 		DetailedRisk risk = new DetailedRisk();
 		
 		risk.setType("pie");
 		
 		Map<String, String> title = new HashMap<String, String>();
-		title.put("text", getTitle(type));
+		title.put("text", getTitle(type.name()));
 		title.put("align", "right");
 		title.put("fontColor", "#616161");
 		risk.setTitle(title);
@@ -177,24 +210,24 @@ public class DetailedRiskService {
 		List<DetailedSeries> series = new ArrayList<DetailedSeries>();
 		
 		int incrementColour = 20;
-		// @TODO: RG, replace with values from data store
-		for(int i=0; i < 3; i++) {
+
+		
+		for(Position pos : result) {
 			
 			// calculate the colour shade, each slice of the inner pie is of the same base colour with a variation on shading
-			HTMLColour htmlColour = colours.get(type);
+			HTMLColour htmlColour = colours.get(type.name());
 			htmlColour.incrementColour(incrementColour);
 			String colour = htmlColour.getHex();
 			
 			// create the series data to add to the series list of data
 			DetailedSeries seriesItem = new DetailedSeries();
 			
-			List<Long> values = new ArrayList<Long>();
-			// @TODO: RG, obtain the total amount of particular security
-			values.add(new Long(25684578*(i+1)));
+			List<BigDecimal> values = new ArrayList<BigDecimal>();
+			values.add(pos.getMktVal());
 			seriesItem.setValues(values);
 			
 			// @TODO: RG, obtain the security name
-			seriesItem.setText("Security #" + (i+1));
+			seriesItem.setText("Security #" + ((int)(Math.random() * 5000)));
 			seriesItem.setBackgroundColor(colour);
 			seriesItem.setLegendText("%t<br><b>$%v</b>");
 			
@@ -221,6 +254,15 @@ public class DetailedRiskService {
 		risk.setSeries(series);
 		
 		return risk;
+	}
+
+	private IndicatorValue getIndicatorValueForPosition(IndicatorName indicator, List<? extends BaseIndex> indicatorList, Position pos) {
+		for(BaseIndex idx : indicatorList) {
+			if(idx.getCountry().equals(pos.getCountry().getCode())){
+				return thresholdMappingService.mapToValue(indicator, new BigDecimal(idx.getVal()));
+			}
+		}
+		return null;
 	}
 	
 }

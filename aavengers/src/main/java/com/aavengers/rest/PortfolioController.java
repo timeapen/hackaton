@@ -1,15 +1,7 @@
 package com.aavengers.rest;
 
-import com.aavengers.*;
-import com.aavengers.data.ConflictIndexRepository;
-import com.aavengers.data.CorruptionIndexRepository;
-import com.aavengers.data.PositionRepository;
-import com.aavengers.entity.BaseIndex;
-import com.aavengers.entity.Position;
-import com.aavengers.service.DetailedRiskService;
-import com.aavengers.service.IndicatorRiskService;
-import com.aavengers.service.RiskService;
-import com.aavengers.service.ThresholdMappingService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,10 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.aavengers.DetailedRisk;
+import com.aavengers.IndicatorName;
+import com.aavengers.IndicatorRisk;
+import com.aavengers.IndicatorValue;
+import com.aavengers.OverallRisk;
+import com.aavengers.service.DetailedRiskService;
+import com.aavengers.service.IndicatorRiskService;
+import com.aavengers.service.RiskService;
 
 @Controller
 @RequestMapping("/portfolio")
@@ -52,7 +48,7 @@ public class PortfolioController {
     @ResponseBody
     @GetMapping(value = "/detailedRisk/{accountNumber}/{type}/{indicator}", produces = "application/json")
     public DetailedRisk getDetailedRisk(@PathVariable String accountNumber, @PathVariable String type, @PathVariable String indicator) {
-    	return detailedRiskService.detailedRiskForClient(accountNumber, type, indicator);
+    	return detailedRiskService.detailedRiskForClient(IndicatorName.valueOf(indicator), IndicatorValue.valueOf(type), 2016, accountNumber.split("\\|"));
     }
     
 }

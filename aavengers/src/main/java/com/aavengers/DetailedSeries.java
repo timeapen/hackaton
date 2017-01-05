@@ -1,11 +1,12 @@
 package com.aavengers;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 public class DetailedSeries {
 
-	List<Long> values;
+	List<BigDecimal> values;
 	String text;
 	String backgroundColor;
 	String legendText;
@@ -14,10 +15,11 @@ public class DetailedSeries {
 	Map<String, Object> legendItem;
 	Map<String, Object> tooltip;
 	
-	public List<Long> getValues() {
+	
+	public List<BigDecimal> getValues() {
 		return values;
 	}
-	public void setValues(List<Long> values) {
+	public void setValues(List<BigDecimal> values) {
 		this.values = values;
 	}
 	public String getText() {
