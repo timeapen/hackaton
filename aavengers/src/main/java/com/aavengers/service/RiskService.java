@@ -3,15 +3,11 @@ package com.aavengers.service;
 import com.aavengers.IndicatorName;
 import com.aavengers.IndicatorValue;
 import com.aavengers.OverallRisk;
-import com.aavengers.data.ConflictIndexRepository;
-import com.aavengers.data.CorruptionIndexRepository;
-import com.aavengers.data.FreedomIndexRepository;
-import com.aavengers.data.PositionRepository;
+import com.aavengers.data.*;
 import com.aavengers.entity.BaseIndex;
 import com.aavengers.entity.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -34,6 +30,9 @@ public class RiskService {
     FreedomIndexRepository freedomIndexRepository;
 
     @Autowired
+    EnvironmentIndexRepository environmentIndexRepository;
+
+    @Autowired
     ThresholdMappingService thresholdMappingService;
 
     public OverallRisk getOverallRisk(int year, String... accountNumbers) {
@@ -44,6 +43,7 @@ public class RiskService {
         data.put(IndicatorName.Corruption, thresholdMappingService.mapToValue(IndicatorName.Corruption, getCorruptionIndexValue(year, positions)));
         data.put(IndicatorName.Conflict, thresholdMappingService.mapToValue(IndicatorName.Conflict, getConflictIndexValue(year, positions)));
         data.put(IndicatorName.Freedom, thresholdMappingService.mapToValue(IndicatorName.Freedom, getFreedomIndexValue(year, positions)));
+        data.put(IndicatorName.Environment, thresholdMappingService.mapToValue(IndicatorName.Environment, getEnvironmentIndexValue(year, positions)));
 
         return new OverallRisk(data);
     }
@@ -58,6 +58,10 @@ public class RiskService {
 
     private BigDecimal getFreedomIndexValue(int year, List<Position> positions) {
         return averageValue(positions, freedomIndexRepository.findByYear(year));
+    }
+
+    private BigDecimal getEnvironmentIndexValue(int year, List<Position> positions) {
+        return averageValue(positions, environmentIndexRepository.findByYear(year));
     }
 
     private BigDecimal averageValue(List<Position> positions, List<? extends BaseIndex> corruptionIdx) {

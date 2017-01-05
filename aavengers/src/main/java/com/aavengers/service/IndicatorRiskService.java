@@ -36,6 +36,9 @@ public class IndicatorRiskService {
     FreedomIndexRepository freedomIndexRepository;
 
     @Autowired
+    FreedomIndexRepository environemntIndexRepository;
+
+    @Autowired
     ThresholdMappingService thresholdMappingService;
 
     public List<IndicatorRisk> getIndicatorRisk(String indicatorName, int year, String... accountNumbers) {
@@ -55,7 +58,8 @@ public class IndicatorRiskService {
         indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Freedom, freedomIndexRepository.findByYear(year));
-        
+        indexValues.put(IndicatorName.Freedom, environemntIndexRepository.findByYear(year));
+
         for(Position pos : positions) {
         	BigDecimal posIndicator = getIndicatorForPosition(indexValues.get(indicator), pos.getCountry());
         	if(posIndicator == null) {
