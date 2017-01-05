@@ -16,40 +16,61 @@ class Indicators {
   createRadarChartIndicators() {
     this.$log.info("Generating radar chart indicators");
 
-    return this.$http
-          .get('app/charts/radar.json')
+    return this.getRadarChartFormat()
           .then(response => {
             const chartData = response.data;
 
-            this.addRadarIndices(chartData);
-            this.addRadarIndexRatings(chartData);
-
-            return this.$http
-              .get('app/charts/radar-mock-series-data.json')
+            return this.getGaiaIndicators()
               .then(response => {
-                this.$log.info("Series Data: ", response.data);
-                const positionScores = response.data;
+                const indicators = response.data;
+                chartData["scale-k"].values = indicators.indicators;
+                chartData["scale-v"].values = indicators.valueThresholds;
 
-                //  Colors on the radar chart should come from the server and be based on calculated risk factor
-                return this.$http
-                 .get('app/charts/radar-series.json')
-                 .then(response => {
-                   const scoresData = [];
-                   angular.forEach(positionScores, (score => {
-                     const scoreChartData = {};
-                     Object.assign(scoreChartData, response.data);
+                return this.getRadarSeriesDataFormat()
+                                .then(response => {
+                                  this.$log.info("Series Data: ", response.data);
+                                  const positionScores = response.data;
 
-                     scoreChartData.text = score.id;
-                     scoreChartData.values = score.values;
+                                  //  Colors on the radar chart should come from the server and be based on calculated risk factor
+                                  return this.$http
+                                   .get('app/charts/radar-series.json')
+                                   .then(response => {
+                                     chartData.series = this.createIndicatorScores(positionScores, response.data);
 
-                     scoresData.push(scoreChartData);
-                   }));
-                   chartData.series = scoresData;
-
-                   return chartData;
-                 });
+                                     return chartData;
+                                   });
+                                });
               });
           });
+  }
+
+  createIndicatorScores(positionScores, scoresFormat) {
+    const scoresData = [];
+    angular.forEach(positionScores, (score => {
+      const scoreChartData = {};
+      Object.assign(scoreChartData, scoresFormat);
+
+      scoreChartData.text = score.id;
+      scoreChartData.values = score.values;
+
+      scoresData.push(scoreChartData);
+    }));
+    return scoresData;
+  }
+
+  getRadarChartFormat() {
+    return this.$http
+              .get('app/charts/radar.json');
+  }
+
+  getGaiaIndicators() {
+    return this.$http
+              .get(`http://${serverDomain}/indicators`);
+  }
+
+  getRadarSeriesDataFormat() {
+    return this.$http
+      .get('app/charts/radar-mock-series-data.json');
   }
 
   addRadarIndices(chartData) {
