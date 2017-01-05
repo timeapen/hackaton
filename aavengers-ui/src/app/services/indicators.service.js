@@ -26,14 +26,13 @@ class Indicators {
                 chartData["scale-k"].values = indicators.indicators;
                 chartData["scale-v"].values = indicators.valueThresholds;
 
-                return this.getRadarSeriesDataFormat()
+                return this.getRadarIndicatorScores()
                                 .then(response => {
                                   this.$log.info("Series Data: ", response.data);
                                   const positionScores = response.data;
 
                                   //  Colors on the radar chart should come from the server and be based on calculated risk factor
-                                  return this.$http
-                                   .get('app/charts/radar-series.json')
+                                  return this.getRadarSeriesDataFormat()
                                    .then(response => {
                                      chartData.series = this.createIndicatorScores(positionScores, response.data);
 
@@ -68,9 +67,14 @@ class Indicators {
               .get(`http://${serverDomain}/indicators`);
   }
 
+  getRadarIndicatorScores() {
+    return this.$http
+      .get('app/charts/radar-mock-indicator-scores.json');
+  }
+
   getRadarSeriesDataFormat() {
     return this.$http
-      .get('app/charts/radar-mock-series-data.json');
+     .get('app/charts/radar-series.json');
   }
 
   addRadarIndices(chartData) {
