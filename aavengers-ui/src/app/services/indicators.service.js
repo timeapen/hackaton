@@ -3,8 +3,6 @@ import angular from 'angular';
 // Constants should be eventually pulled out into configuration data, retrieved from the server
 const serverDomain = '//localhost:8080/gaia';
 const colours = {RISK: '#FF0000', NEAR: '#0000FF', SAFE: '#00FF00'};
-const id = '140735003';
-const indicator = 'CORRUPTION';
 
 class Indicators {
 
@@ -15,7 +13,7 @@ class Indicators {
     this.$log = $log;
   }
 
-  getPieChartIndicators() {
+  getPieChartIndicators(accountId, indicator) {
     this.$log.info("Generating pie chart indicators");
 
     return this.$http
@@ -32,37 +30,7 @@ class Indicators {
 
             const series = [];
             angular.forEach(serverAggregate, (value => {
-              const type = value.type;
-              const colour = colours[type];
-
-              const seriesItem = {};
-              seriesItem.values = [];
-              seriesItem.values.push(value.amount);
-
-              // URL for drill down pie chart
-              seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${id}/${type}/${indicator}`;
-              this.$log.info('url: ', seriesItem.url);
-
-              seriesItem.target = "graph";
-              seriesItem.text = value.title;
-              seriesItem.backgroundColor = colour;
-              seriesItem.legendText = "%t<br><b>$%v</b>";
-
-              const legendMarker = {};
-              legendMarker.type = "circle";
-              legendMarker.size = 7;
-              legendMarker.borderColor = colour;
-              legendMarker.borderWidth = 4;
-              legendMarker.backgroundColor = "#FFF";
-
-              seriesItem.legendMarker = legendMarker;
-
-              const legendItem = {};
-              legendItem.backgroundColor = colour;
-
-              seriesItem.legendItem = legendItem;
-
-              series.push(seriesItem);
+              series.push(createPieSeriesItem(value, accountId, indicator));
             }));
 
             angular.merge(chartData.graphset[0], {series});
@@ -72,6 +40,39 @@ class Indicators {
       }
     );
   }
+}
+
+function createPieSeriesItem(position, accountId, indicator) {
+  const type = position.type;
+  const colour = colours[type];
+
+  const seriesItem = {};
+  seriesItem.values = [];
+  seriesItem.values.push(position.amount);
+
+  // URL for drill down pie chart
+  seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${accountId}/${type}/${indicator}`;
+
+  seriesItem.target = "graph";
+  seriesItem.text = position.title;
+  seriesItem.backgroundColor = colour;
+  seriesItem.legendText = "%t<br><b>$%v</b>";
+
+  const legendMarker = {};
+  legendMarker.type = "circle";
+  legendMarker.size = 7;
+  legendMarker.borderColor = colour;
+  legendMarker.borderWidth = 4;
+  legendMarker.backgroundColor = "#FFF";
+
+  seriesItem.legendMarker = legendMarker;
+
+  const legendItem = {};
+  legendItem.backgroundColor = colour;
+
+  seriesItem.legendItem = legendItem;
+
+  return seriesItem;
 }
 
 export default angular.module('services.indicators', [])
