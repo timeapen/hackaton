@@ -10,7 +10,7 @@ public class CorruptionIndex {
     @Id @GeneratedValue
     Long id;
 
-    @Column(name = "country_name")
+    @Column(name = "country_code", columnDefinition="CHAR(3)")
     String country;
 
 

@@ -30,7 +30,6 @@ public class PortfolioController {
     @ResponseBody
     @GetMapping(value = "/positions/{accountNumber}", produces = "application/json")
     public List<Position> getIndicators(@PathVariable String accountNumber) {
-
         return positionRepository.findByAcctNum(accountNumber);
     }
 
@@ -39,18 +38,19 @@ public class PortfolioController {
     public OverallRisk getOverallRisk(@PathVariable String accountNumber) {
 
         Map<String, String> data = new HashMap<>();
+        Map<String, BigDecimal> corruptionIdxMap = new HashMap<>();
         List<Position> positions = positionRepository.findByAcctNum(accountNumber);
         List<CorruptionIndex> corruptionIdx = corruptionIndexRepository.findByYear(2016);
-        Map<String, BigDecimal> corruptionIdxMap = new HashMap<>();
+        BigDecimal calculatedTotal = BigDecimal.ZERO;
+        BigDecimal totalMarketValue = BigDecimal.ZERO;
+
+
         for(CorruptionIndex idx : corruptionIdx) {
             corruptionIdxMap.put(idx.getCountry(), new BigDecimal(idx.getVal()));
         }
 
-        BigDecimal calculatedTotal = BigDecimal.ZERO;
-        BigDecimal totalMarketValue = BigDecimal.ZERO;
         for(Position pos : positions) {
-
-            BigDecimal posCorruptionIdx = corruptionIdxMap.get(pos.getCountry().getName());
+            BigDecimal posCorruptionIdx = corruptionIdxMap.get(pos.getCountry().getCode());
             calculatedTotal = calculatedTotal.add(posCorruptionIdx.multiply(pos.getMktVal()));
             totalMarketValue = totalMarketValue.add(pos.getMktVal());
         }
