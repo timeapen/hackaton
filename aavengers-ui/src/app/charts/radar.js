@@ -17,7 +17,7 @@ class RadarController {
             $log.info("Series Data: ", response.data);
             const positionScores = response.data;
 
-            //TODO: Colors on the radar chart should come from the server and be based on calculated risk factor
+            //  Colors on the radar chart should come from the server and be based on calculated risk factor
             $http
              .get('app/charts/radar-series.json')
              .then(response => {
