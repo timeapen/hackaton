@@ -1,14 +1,18 @@
 import angular from 'angular';
 
+// Constants should be eventually pulled out into configuration data, retrieved from the server
+const serverDomain = '//localhost:8080/gaia';
+const colours = {RISK: '#FF0000', NEAR: '#0000FF', SAFE: '#00FF00'};
+const id = '140735003';
+const indicator = 'CORRUPTION';
+
 class Indicators {
 
   /** @ngInject */
   constructor($http, $log) {
     $log.info("Creating Indicators Service");
-
     this.$http = $http;
     this.$log = $log;
-    this.serverDomain = '//localhost:8080/gaia';
   }
 
   getPieChartIndicators() {
@@ -19,14 +23,6 @@ class Indicators {
       .get('app/charts/pie/pie.json')
       .then(response => {
         const chartData = response.data;
-
-        const colours = {};
-        colours.RISK = '#FF0000';
-        colours.NEAR = '#0000FF';
-        colours.SAFE = '#00FF00';
-
-        const id = '140735003';
-        const indicator = 'CORRUPTION';
 
         return this.$http
           // series data from backend
@@ -44,7 +40,7 @@ class Indicators {
               seriesItem.values.push(value.amount);
 
               // URL for drill down pie chart
-              seriesItem.url = `${this.serverDomain}/portfolio/detailedRisk/${id}/${type}/${indicator}`;
+              seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${id}/${type}/${indicator}`;
               this.$log.info('url: ', seriesItem.url);
 
               seriesItem.target = "graph";
