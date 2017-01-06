@@ -14,10 +14,13 @@ public class ThresholdMappingService {
     private static TreeMap<BigDecimal, IndicatorValue> valueThresholds;
     static {
         valueThresholds = new TreeMap();
-        valueThresholds.put(new BigDecimal(20), IndicatorValue.Poor);
-        valueThresholds.put(new BigDecimal(40), IndicatorValue.Fair);
-        valueThresholds.put(new BigDecimal(60), IndicatorValue.Good);
-        valueThresholds.put(new BigDecimal(80), IndicatorValue.VeryGood);
+        int poorThreshold = 20;
+        int remainingStep = (100 - poorThreshold) / 4;
+
+        valueThresholds.put(new BigDecimal(poorThreshold), IndicatorValue.Poor);
+        valueThresholds.put(new BigDecimal(poorThreshold + remainingStep), IndicatorValue.Fair);
+        valueThresholds.put(new BigDecimal(poorThreshold + remainingStep * 2), IndicatorValue.Good);
+        valueThresholds.put(new BigDecimal(poorThreshold + remainingStep * 3), IndicatorValue.VeryGood);
         valueThresholds.put(new BigDecimal(100), IndicatorValue.Excellent);
     }
 
