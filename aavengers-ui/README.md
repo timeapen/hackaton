@@ -15,7 +15,6 @@ npm install gulp-cli -g
 Go to the 'aavengers-ui' directory and run the command:  
 ```
 npm install
-bower install
 gulp serve
 ````
 
