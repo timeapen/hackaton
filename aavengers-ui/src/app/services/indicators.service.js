@@ -17,32 +17,32 @@ class Indicators {
     this.$log.info("Generating radar chart indicators for company id: ", companyId);
 
     return this.getRadarChartFormat()
+      .then(response => {
+        const chartData = response.data;
+
+        return this.getGaiaIndicators()
           .then(response => {
-            const chartData = response.data;
+            const gaiaMeasures = response.data;
+            const indicators = gaiaMeasures.indicators;
+            this.$log.info("Gaia indicators: ", indicators);
+            chartData["scale-k"].values = indicators;
+            chartData["scale-v"].values = gaiaMeasures.valueThresholds;
 
-            return this.getGaiaIndicators()
+            return this.getRadarIndicatorScores(companyId)
               .then(response => {
-                const gaiaMeasures = response.data;
-                const indicators = gaiaMeasures.indicators;
-                this.$log.info("Gaia indicators: ", indicators);
-                chartData["scale-k"].values = indicators;
-                chartData["scale-v"].values = gaiaMeasures.valueThresholds;
+                this.$log.info("Series Data: ", response.data);
+                const riskScores = response.data.riskData;
 
-                return this.getRadarIndicatorScores(companyId)
-                                .then(response => {
-                                  this.$log.info("Series Data: ", response.data);
-                                  const riskScores = response.data.riskData;
+                //  Colors on the radar chart should come from the server and be based on calculated risk factor
+                return this.getRadarSeriesDataFormat()
+                 .then(response => {
+                   chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
 
-                                  //  Colors on the radar chart should come from the server and be based on calculated risk factor
-                                  return this.getRadarSeriesDataFormat()
-                                   .then(response => {
-                                     chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
-
-                                     return chartData;
-                                   });
-                                });
+                   return chartData;
+                 });
               });
           });
+      });
   }
 
   createIndicatorScores(riskScores, indicators, scoresFormat) {
@@ -50,7 +50,7 @@ class Indicators {
 
     const scoreChartData = {};
     Object.assign(scoreChartData, scoresFormat);
-    scoreChartData.text = 'Company Id';
+    scoreChartData.text = 'Portfolio';
 
     const chartRiskScores = [];
     angular.forEach(indicators, (indicator => {
