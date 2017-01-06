@@ -28,6 +28,9 @@ public class DetailedRiskService {
 
 	public static Logger LOGGER = LoggerFactory.getLogger(DetailedRiskService.class);
 	
+	private static final int MAX_SECURITY_NAME_LENGTH = 15;
+	private static final String PERFORMANCE = "Performance";
+	
     @Autowired
     PositionRepository positionRepository;
     
@@ -144,7 +147,7 @@ public class DetailedRiskService {
 		risk.setType("pie");
 		
 		Map<String, String> title = new HashMap<String, String>();
-		title.put("text", getTitle(type.name()));
+		title.put("text", PERFORMANCE + ": " + getTitle(type.name()));
 		title.put("align", "right");
 		title.put("fontColor", "#616161");
 		risk.setTitle(title);
@@ -162,6 +165,7 @@ public class DetailedRiskService {
 		item.put("fontColor", "#fff");
 		item.put("align", "right");
 		item.put("width", new Integer(100));
+		item.put("fontSize", new Integer(8));
 		legend.put("item", item);
 		
 		Map<String, Object> header = new HashMap<String, Object>();
@@ -210,7 +214,7 @@ public class DetailedRiskService {
 		Map<String, Object> tooltip = new HashMap<String, Object>();
 		tooltip.put("text", "%t<br>$%v");
 		tooltip.put("placement", "node:out");
-		tooltip.put("offsetR", new Integer(-40));
+		tooltip.put("offsetR", new Integer(-60));
 		tooltip.put("width", new Integer(70));
 		tooltip.put("fontColor", "#fff");
 		tooltip.put("borderRadius", new Integer(3));
@@ -242,7 +246,7 @@ public class DetailedRiskService {
 			values.add(pos.getMktVal());
 			seriesItem.setValues(values);
 			
-			seriesItem.setText(pos.getSecurityName());
+			seriesItem.setText(pos.getSecurityName().substring(0, ((pos.getSecurityName().length() > MAX_SECURITY_NAME_LENGTH) ? MAX_SECURITY_NAME_LENGTH : pos.getSecurityName().length())));
 			seriesItem.setBackgroundColor(colour);
 			seriesItem.setLegendText("%t<br><b>$%v</b>");
 			

@@ -82,7 +82,7 @@
       "tooltip":{
         "text":"%t<br>$%v",
         "placement": "node:out",
-        "offsetR": -40,
+        "offsetR": -60,
         "width": 70,
         "fontColor": "#fff",
         "borderRadius": 3,
