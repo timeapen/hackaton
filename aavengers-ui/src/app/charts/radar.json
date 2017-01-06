@@ -1,5 +1,13 @@
 {
   "type": "radar",
+  "plot" : {
+    "aspect": "area",
+    "animation": {
+     "effect":2,
+     "sequence":1,
+     "speed":700
+    }
+  },
   "background-color": "white",
   "border-top": "3px solid #7e7e7e",
   "border-bottom": "3px solid #7e7e7e",
