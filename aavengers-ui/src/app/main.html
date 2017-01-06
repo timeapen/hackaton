@@ -1,8 +1,12 @@
-<div class="main-container">
-  <fountain-header></fountain-header>
-  <main class="main">
-    <radar></radar>
-    <pie></pie>
-  </main>
-  <fountain-footer></fountain-footer>
-</div>
+<fountain-header></fountain-header>
+<md-content class="md-padding" >
+  <div layout="column" layout-gt-xs="row" >
+    <md-card flex flex-gt-xs="32">
+       <radar></radar>
+    </md-card>
+    <md-card flex flex-gt-xs="38">
+      <pie></pie>
+    </md-card>
+  </div>
+</md-content>
+<fountain-footer></fountain-footer>
