@@ -1,8 +1,8 @@
 {
   "history":{
     "borderColor": "#616161",
-    "borderWidth": 3,
-    "y":20,
+    "borderWidth": 0,
+    "y":260,
     "height": 30,
     "width": 45,
     "borderRadius": 2,
@@ -26,7 +26,7 @@
       "type": "pie", 
       "title":{
         "text": "Index",
-        "align": "right",
+        "align": "center",
         "fontColor": "#616161",
         "fontSize": "18px"
       },
