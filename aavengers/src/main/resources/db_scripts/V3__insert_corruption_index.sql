@@ -5,6 +5,33 @@ CREATE TABLE CORRUPTION_INDEX (
      idx_val        float
 );
 
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('AN ',2014,81);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('AN ',2015,81);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('AN ',2016,79);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('BM ',2014,87);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('BM ',2015,87);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('BM ',2016,88);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('GG ',2014,82);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('GG ',2015,82);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('GG ',2016,82);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('JE ',2014,75);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('JE ',2015,75);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('JE ',2016,76);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('KY ',2014,83);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('KY ',2015,83);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('KY ',2016,83);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('MH ',2014,69);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('MH ',2015,70);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('MH ',2016,70);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('NC ',2014,77);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('NC ',2015,77);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('NC ',2016,79);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('PR ',2014,60);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('PR ',2015,70);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('PR ',2016,59);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('VG ',2014,80);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('VG ',2015,80);
+INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('VG ',2016,89);
 INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('DK ',2014,92);
 INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('DK ',2015,91);
 INSERT INTO CORRUPTION_INDEX (country_code, idx_year, idx_val) values ('DK ',2016,92);

@@ -5,7 +5,33 @@ CREATE TABLE ENVIRONMENT_INDEX (
      idx_val        float
 );
 
-
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('AN ', 2016, 67.20);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('AN ', 2015, 68.20);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('AN ', 2014, 68.37);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('BM ', 2016, 81.99);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('BM ', 2015, 82.45);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('BM ', 2014, 83.01);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('GG ', 2016, 85.22);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('GG ', 2015, 86.45);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('GG ', 2014, 86.37);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('JE ', 2016, 79.17);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('JE ', 2015, 78.92);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('JE ', 2014, 78.88);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('KY ', 2016, 82.71);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('KY ', 2015, 82.59);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('KY ', 2014, 82.76);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('MH ', 2016, 83.12);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('MH ', 2015, 83.29);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('MH ', 2014, 83.19);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('NC ', 2016, 77.72);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('NC ', 2015, 77.79);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('NC ', 2014, 77.77);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('PR ', 2016, 70.27);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('PR ', 2015, 69.81);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('PR ', 2014, 71.62);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('VG ', 2016, 76.27);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('VG ', 2015, 76.81);
+INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('VG ', 2014, 76.62);
 INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('AL ', 2016, 69.20);
 INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('AL ', 2015, 70.20);
 INSERT INTO ENVIRONMENT_INDEX (country_code, idx_year, idx_val) VALUES ('AL ', 2014, 74.37);

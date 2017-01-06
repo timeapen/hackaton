@@ -5,7 +5,33 @@ CREATE TABLE FREEDOM_INDEX (
      idx_val        float
 );
 
-
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('AN ', 2016, 78.72);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('AN ', 2015, 79.44);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('AN ', 2014, 80.37);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('BM ', 2016, 86.20);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('BM ', 2015, 86.20);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('BM ', 2014, 87.37);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('GG ', 2016, 79.78);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('GG ', 2015, 80.92);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('GG ', 2014, 80.80);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('JE ', 2016, 82.78);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('JE ', 2015, 82.92);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('JE ', 2014, 82.80);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('KY ', 2016, 84.83);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('KY ', 2015, 84.29);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('KY ', 2014, 84.41);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('MH ', 2016, 76.32);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('MH ', 2015, 77.91);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('MH ', 2014, 75.90);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('NC ', 2016, 82.79);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('NC ', 2015, 82.80);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('NC ', 2014, 82.81);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('PR ', 2016, 84.12);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('PR ', 2015, 84.08);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('PR ', 2014, 84.18);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('VG ', 2016, 78.42);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('VG ', 2015, 78.38);
+INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('VG ', 2014, 78.68);
 INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('AL ', 2016, 69.20);
 INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('AL ', 2015, 70.20);
 INSERT INTO FREEDOM_INDEX (country_code, idx_year, idx_val) VALUES ('AL ', 2014, 74.37);
