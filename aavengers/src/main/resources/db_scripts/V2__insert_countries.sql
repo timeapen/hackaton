@@ -15,6 +15,7 @@ INSERT INTO Country (name, code) values ('Antarctica','AQ ');
 INSERT INTO Country (name, code) values ('Antigua and Barbuda','AG ');
 INSERT INTO Country (name, code) values ('Argentina','AR ');
 INSERT INTO Country (name, code) values ('Armenia','AM ');
+INSERT INTO Country (name, code) values ('Netherlands Antilles','AN ');
 INSERT INTO Country (name, code) values ('Aruba','AW ');
 INSERT INTO Country (name, code) values ('Australia','AU ');
 INSERT INTO Country (name, code) values ('Austria','AT ');
