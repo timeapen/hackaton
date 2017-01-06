@@ -2,10 +2,10 @@ const accountId = '92692004|000133190USD|000100292HKD|000133077CHF|000133468EUR|
 
 class RadarController {
   /** @ngInject */
-  constructor($http, $log, indicators) {
+  constructor($http, $log, chartData) {
     $log.info('RADAR Controller');
 
-    indicators.createRadarChartIndicators(accountId)
+    chartData.createRadarChartIndicators(accountId)
      .then(response => {
        this.chartData = response;
      });

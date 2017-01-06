@@ -5,17 +5,17 @@ const userIndicators = ['Corruption', 'Conflict', 'BusinessFreedom', 'Environmen
 class PieController {
 
   /** @ngInject */
-  constructor($http, $log, indicators) {
+  constructor($http, $log, chartData) {
     this.$log = $log;
     $log.info('PIE Controller');
-    this.indicators = indicators;
+    this.indicators = chartData;
 
     this.year = '2016';
     this.years = ['2016', '2015', '2014'];
 
     this.indicatorPieChartData = [];
     angular.forEach(userIndicators, (userIndicator => {
-      indicators.createPieChart(accountId, userIndicator)
+      chartData.createPieChart(accountId, userIndicator)
        .then(response => {
          this.indicatorPieChartData.push(response);
        });

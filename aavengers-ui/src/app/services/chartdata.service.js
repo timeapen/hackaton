@@ -4,7 +4,7 @@ import angular from 'angular';
 const serverDomain = '//localhost:8080/gaia';
 const colours = {Poor: '#F93F26', Fair: '#FFD129', Good: '#008500', VeryGood: '#6AADE4', Excellent: '#002888'};
 
-class Indicators {
+class ChartData {
 
   /** @ngInject */
   constructor($http, $log) {
@@ -15,6 +15,7 @@ class Indicators {
 
   createRadarChartIndicators(companyId) {
     this.$log.info("Generating radar chart indicators for company id: ", companyId);
+    this.$log.info("My chart data format: ", this.radarChartFormat);
 
     return this.getRadarChartFormat()
       .then(response => {
@@ -30,16 +31,14 @@ class Indicators {
 
             return this.getRadarIndicatorScores(companyId)
               .then(response => {
-                this.$log.info("Series Data: ", response.data);
+                this.$log.info("Radar Indicator Scores: ", response.data);
                 const riskScores = response.data.riskData;
-
-                //  Colors on the radar chart should come from the server and be based on calculated risk factor
+                this.$log.info("Radar Indicator Targets: ", response.data);
                 return this.getRadarSeriesDataFormat()
-                 .then(response => {
-                   chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
-
-                   return chartData;
-                 });
+                      .then(response => {
+                        chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
+                        return chartData;
+                      });
               });
           });
       });
@@ -75,6 +74,11 @@ class Indicators {
   getRadarIndicatorScores(companyId) {
     return this.$http
       .get(`http://${serverDomain}/portfolio/overallRisk/${companyId}`);
+  }
+
+  getRadarIndicatorTargets() {
+    return this.$http
+        .get(`http://${serverDomain}/indicators/settings`);
   }
 
   getRadarSeriesDataFormat() {
@@ -152,6 +156,6 @@ class Indicators {
     return seriesItem;
   }
 }
-export default angular.module('services.indicators', [])
-  .service('indicators', Indicators)
+export default angular.module('services.chartData', [])
+  .service('chartData', ChartData)
   .name;
