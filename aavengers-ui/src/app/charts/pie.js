@@ -21,6 +21,10 @@ class PieController {
        });
     }));
   }
+
+  yearChange(year) {
+    this.$log.info('year changed: ', year);
+  }
 }
 
 export const pie = {
