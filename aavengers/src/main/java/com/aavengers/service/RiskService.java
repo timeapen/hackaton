@@ -42,7 +42,7 @@ public class RiskService {
 
         data.put(IndicatorName.Corruption, thresholdMappingService.mapToValue(IndicatorName.Corruption, getCorruptionIndexValue(year, positions)));
         data.put(IndicatorName.Conflict, thresholdMappingService.mapToValue(IndicatorName.Conflict, getConflictIndexValue(year, positions)));
-        data.put(IndicatorName.Freedom, thresholdMappingService.mapToValue(IndicatorName.Freedom, getFreedomIndexValue(year, positions)));
+        data.put(IndicatorName.BusinessFreedom, thresholdMappingService.mapToValue(IndicatorName.BusinessFreedom, getFreedomIndexValue(year, positions)));
         data.put(IndicatorName.Environment, thresholdMappingService.mapToValue(IndicatorName.Environment, getEnvironmentIndexValue(year, positions)));
         data.put(IndicatorName.ReputationRisk, thresholdMappingService.mapToValue(IndicatorName.ReputationRisk, getRepRiskIndexValue(year, positions)));
 
