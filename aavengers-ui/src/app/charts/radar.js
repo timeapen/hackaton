@@ -2,13 +2,18 @@ const accountId = '92692004|000133190USD|000100292HKD|000133077CHF|000133468EUR|
 
 class RadarController {
   /** @ngInject */
-  constructor($http, $log, chartData) {
+  constructor($http, $log, indicators, chartData) {
     $log.info('RADAR Controller');
 
-    chartData.createRadarChartIndicators(accountId)
-     .then(response => {
-       this.chartData = response;
-     });
+    indicators.getGaiaIndicators()
+      .then (response => {
+        const indicators = response.data;
+        chartData.createRadarChartIndicators(accountId, indicators)
+          .then(response => {
+            this.chartData = response;
+          });
+      });
+
   }
 
 }

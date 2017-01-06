@@ -13,7 +13,7 @@ class ChartData {
     this.$log = $log;
   }
 
-  createRadarChartIndicators(companyId) {
+  createRadarChartIndicators(companyId, indicators) {
     this.$log.info("Generating radar chart indicators for company id: ", companyId);
     this.$log.info("My chart data format: ", this.radarChartFormat);
 
@@ -21,26 +21,21 @@ class ChartData {
       .then(response => {
         const chartData = response.data;
 
-        return this.getGaiaIndicators()
-          .then(response => {
-            const gaiaMeasures = response.data;
-            const indicators = gaiaMeasures.indicators;
-            this.$log.info("Gaia indicators: ", indicators);
-            chartData["scale-k"].values = indicators;
-            chartData["scale-v"].values = gaiaMeasures.valueThresholds;
+        chartData["scale-k"].values = indicators;
+        chartData["scale-v"].values = gaiaMeasures.valueThresholds;
 
-            return this.getRadarIndicatorScores(companyId)
+        return this.getRadarIndicatorScores(companyId)
+          .then(response => {
+            this.$log.info("Radar Indicator Scores: ", response.data);
+            const riskScores = response.data.riskData;
+            this.$log.info("Radar Indicator Targets: ", response.data);
+            return this.getRadarSeriesDataFormat()
               .then(response => {
-                this.$log.info("Radar Indicator Scores: ", response.data);
-                const riskScores = response.data.riskData;
-                this.$log.info("Radar Indicator Targets: ", response.data);
-                return this.getRadarSeriesDataFormat()
-                      .then(response => {
-                        chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
-                        return chartData;
-                      });
+                chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
+                return chartData;
               });
           });
+
       });
   }
 
