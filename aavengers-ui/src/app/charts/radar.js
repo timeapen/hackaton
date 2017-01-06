@@ -1,9 +1,11 @@
+const companyId = '000133190USD';
+
 class RadarController {
   /** @ngInject */
   constructor($http, $log, indicators) {
     $log.info('RADAR Controller');
 
-    indicators.createRadarChartIndicators()
+    indicators.createRadarChartIndicators(companyId)
      .then(response => {
        this.chartData = response;
      });
