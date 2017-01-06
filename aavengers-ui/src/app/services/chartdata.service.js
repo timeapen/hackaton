@@ -15,14 +15,12 @@ class ChartData {
 
   createRadarChartIndicators(companyId, indicators) {
     this.$log.info("Generating radar chart indicators for company id: ", companyId);
-    this.$log.info("My chart data format: ", this.radarChartFormat);
-
     return this.getRadarChartFormat()
       .then(response => {
         const chartData = response.data;
 
-        chartData["scale-k"].values = indicators;
-        chartData["scale-v"].values = gaiaMeasures.valueThresholds;
+        chartData["scale-k"].values = indicators.indicators;
+        chartData["scale-v"].values = indicators.valueThresholds;
 
         return this.getRadarIndicatorScores(companyId)
           .then(response => {
@@ -31,11 +29,11 @@ class ChartData {
             this.$log.info("Radar Indicator Targets: ", response.data);
             return this.getRadarSeriesDataFormat()
               .then(response => {
-                chartData.series = this.createIndicatorScores(riskScores, indicators, response.data);
+                chartData.series = this.createIndicatorScores(riskScores, indicators.indicators, response.data);
+                this.$log.info("My chart data: ", chartData);
                 return chartData;
               });
           });
-
       });
   }
 

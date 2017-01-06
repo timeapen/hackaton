@@ -6,14 +6,13 @@ class RadarController {
     $log.info('RADAR Controller');
 
     indicators.getGaiaIndicators()
-      .then (response => {
+      .then(response => {
         const indicators = response.data;
         chartData.createRadarChartIndicators(accountId, indicators)
           .then(response => {
             this.chartData = response;
           });
       });
-
   }
 
 }
