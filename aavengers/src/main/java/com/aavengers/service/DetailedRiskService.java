@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -24,6 +26,8 @@ import com.aavengers.entity.Position;
 @Service
 public class DetailedRiskService {
 
+	public static Logger LOGGER = LoggerFactory.getLogger(DetailedRiskService.class);
+	
     @Autowired
     PositionRepository positionRepository;
     
@@ -121,8 +125,13 @@ public class DetailedRiskService {
         
         List<Position> result = new ArrayList<>();
         for(Position pos : positions) {
-        	if(type.equals(getIndicatorValueForPosition(indicator, indicatorList, pos))){
-        		result.add(pos);
+        	try {
+            	if(type.equals(getIndicatorValueForPosition(indicator, indicatorList, pos))){
+            		result.add(pos);
+            	}
+        	}
+        	catch (NullPointerException npe) {
+        		LOGGER.error("detailedRiskForClient():: exception: {}", npe.getMessage(), npe);
         	}
         }
 	    
@@ -181,6 +190,8 @@ public class DetailedRiskService {
 		Map<String, Object> valueBox = new HashMap<String, Object>();
 		valueBox.put("decimals", new Integer(1));
 		valueBox.put("fontSize", new Integer(10));
+		valueBox.put("fontColor", "#FFF");
+		valueBox.put("fontWeight", "bold");
 		plot.put("valueBox", valueBox);
 		
 		Map<String, Object> animation = new HashMap<String, Object>();
@@ -195,12 +206,13 @@ public class DetailedRiskService {
 		Map<String, Object> tooltip = new HashMap<String, Object>();
 		tooltip.put("text", "%t<br>$%v");
 		tooltip.put("placement", "node:out");
-		tooltip.put("offsetR", new Integer(10));
-		tooltip.put("width", new Integer(110));
+		tooltip.put("offsetR", new Integer(-40));
+		tooltip.put("width", new Integer(70));
 		tooltip.put("fontColor", "#fff");
 		tooltip.put("borderRadius", new Integer(3));
 		tooltip.put("bold", new Boolean(true));
 		tooltip.put("align", "right");
+		tooltip.put("fontSize", new Integer(10));
 		risk.setTooltip(tooltip);
 		
 		Map<String, Object> scale = new HashMap<String, Object>();

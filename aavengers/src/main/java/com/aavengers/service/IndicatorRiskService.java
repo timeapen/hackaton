@@ -58,7 +58,7 @@ public class IndicatorRiskService {
         indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Freedom, freedomIndexRepository.findByYear(year));
-        indexValues.put(IndicatorName.Freedom, environemntIndexRepository.findByYear(year));
+        indexValues.put(IndicatorName.Environment, environemntIndexRepository.findByYear(year));
 
         for(Position pos : positions) {
         	BigDecimal posIndicator = getIndicatorForPosition(indexValues.get(indicator), pos.getCountry());

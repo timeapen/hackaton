@@ -2,6 +2,8 @@ package com.aavengers.rest;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +26,8 @@ import com.aavengers.service.RiskService;
 @CrossOrigin
 public class PortfolioController {
 
+	public static Logger LOGGER = LoggerFactory.getLogger(PortfolioController.class);
+	
     @Autowired
     RiskService riskService;
 
@@ -32,7 +36,7 @@ public class PortfolioController {
 
     @Autowired
     DetailedRiskService detailedRiskService;
-
+    
     @ResponseBody
     @GetMapping(value = "/overallRisk/{accountNumber}", produces = "application/json")
     public OverallRisk getOverallRisk(@PathVariable String accountNumber) {
@@ -42,6 +46,7 @@ public class PortfolioController {
     @ResponseBody
     @GetMapping(value = "/indicatorRisk/{indicator}/{accountNumber}", produces = "application/json")
     public List<IndicatorRisk> getIndicatorRisk(@PathVariable String indicator, @PathVariable String accountNumber) {
+    	LOGGER.info("getIndicatorRisk():: indicator: {}, accountNumber: {}", indicator, accountNumber);
         return indicatorRiskService.getIndicatorRisk(indicator, 2016, accountNumber.split("\\|"));
     }
     

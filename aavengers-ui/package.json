@@ -1,7 +1,13 @@
 {
   "dependencies": {
     "angular": "^1.5.0",
-    "angular-ui-router": "1.0.0-beta.1"
+    "angular-animate": "^1.6.1",
+    "angular-aria": "^1.6.1",
+    "angular-material": "^1.1.1",
+    "angular-messages": "^1.6.1",
+    "angular-ui-router": "1.0.0-beta.1",
+    "zingchart": "^2.5.2",
+    "zingchart-angularjs": "^1.2.0"
   },
   "devDependencies": {
     "@types/angular": "^1.5.16",

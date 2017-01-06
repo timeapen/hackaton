@@ -103,6 +103,7 @@ class Indicators {
               series.push(this.createPieSeriesItem(value, accountId, indicator));
             }));
 
+            angular.merge(chartData.graphset[0].title, {text: indicator});
             angular.merge(chartData.graphset[0], {series});
             return chartData;
           }
@@ -141,7 +142,7 @@ class Indicators {
 
     const legendMarker = {};
     legendMarker.type = "circle";
-    legendMarker.size = 7;
+    legendMarker.size = 2;
     legendMarker.borderColor = colour;
     legendMarker.borderWidth = 4;
     legendMarker.backgroundColor = "#FFF";

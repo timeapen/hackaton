@@ -25,13 +25,14 @@
     {
       "type": "pie", 
       "title":{
-        "text": "Corruption Index",
+        "text": "Index",
         "align": "right",
-        "fontColor": "#616161"
+        "fontColor": "#616161",
+        "fontSize": "18px"
       },
       "legend":{
         "text":"%t<br>",
-        "width": 120,
+        "width": 100,
         "verticalAlign": "middle",
         "borderWidth": 0,
         "toggleAction": "remove",
@@ -40,7 +41,7 @@
           "borderRadius": 3,
           "fontColor": "#fff",
           "align": "right",
-          "width": 100
+          "width": 80
         },
         "header":{
           "text":"Total $",
@@ -67,8 +68,9 @@
         "detach": false,
         "valueBox":{
           "decimals": 1,
-          "fontSize": 16
-
+          "fontSize": 10,
+          "fontColor": "#FFF",
+          "fontWeight": "bold"
         },
         "animation":{
           "effect": 2,
@@ -80,12 +82,13 @@
       "tooltip":{
         "text":"%t<br>$%v",
         "placement": "node:out",
-        "offsetR": 10,
-        "width": 110,
+        "offsetR": -40,
+        "width": 70,
         "fontColor": "#fff",
         "borderRadius": 3,
         "bold": true,
-        "align": "right"
+        "align": "right",
+        "fontSize": 10
       },
       "scale":{
         "sizeFactor": 0.75

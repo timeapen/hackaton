@@ -1,1 +1,14 @@
-<zingchart id = "pieChart" zc-json = "$ctrl.chartData" zc-height = "400" zc-width = "400" ></zingchart>
+<div id="wrapper">
+  <div ng-repeat="indicator in $ctrl.indicatorPieChartData" class="pie">
+    <zingchart zc-json = "indicator" zc-height = "300" zc-width = "300" ></zingchart>
+  </div>
+</div>
+
+<md-input-container>
+  <label>Year</label>
+  <md-select ng-model="ctrl.year" ng-change="alert('a');">
+    <md-option ng-repeat="year in $ctrl.years" ng-value="year">
+      {{year}}
+    </md-option>
+  </md-select>
+</md-input-container>
