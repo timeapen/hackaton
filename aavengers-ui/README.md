@@ -8,7 +8,7 @@ Node 6+ && NPM 3+
 ### Global Installs
 Install Gulp CLI tol Run the following commands:  
 ```
-npm gulp-cli -g
+npm install gulp-cli -g
 ```
 
 ### Application Installs
