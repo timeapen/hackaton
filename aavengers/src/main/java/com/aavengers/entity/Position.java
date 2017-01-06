@@ -26,13 +26,16 @@ public class Position {
     @Column(name = "settled_marketval_acctccy", columnDefinition="CHAR(3)")
     String mktValCcy;
 
-    //@Column(name = "Cntry_Cd_Rpt", columnDefinition="CHAR(3)")
-    //String country;
+    @Column(name = "Security_Description", columnDefinition="CHAR(45)", insertable=false, updatable=false)
+    String securityName;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="Cntry_Cd_Rpt",referencedColumnName="code")
     Country country;
 
+    @ManyToOne(optional=false)
+    @JoinColumn(name="Security_Description",referencedColumnName="Security_Description")
+    ReputationRisk repRisk;
 
     public Long getId() {
         return id;
@@ -88,5 +91,21 @@ public class Position {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public ReputationRisk getRepRisk() {
+        return repRisk;
+    }
+
+    public void setRepRisk(ReputationRisk repRisk) {
+        this.repRisk = repRisk;
+    }
+
+    public String getSecurityName() {
+        return securityName;
+    }
+
+    public void setSecurityName(String securityName) {
+        this.securityName = securityName;
     }
 }

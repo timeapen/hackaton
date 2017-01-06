@@ -40,6 +40,9 @@ public class DetailedRiskService {
     @Autowired
     FreedomIndexRepository freedomIndexRepository;
 
+	@Autowired
+	FreedomIndexRepository environemntIndexRepository;
+
     @Autowired
     ThresholdMappingService thresholdMappingService;
 
@@ -120,6 +123,7 @@ public class DetailedRiskService {
         indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Freedom, freedomIndexRepository.findByYear(year));
+		indexValues.put(IndicatorName.Environment, environemntIndexRepository.findByYear(year));
         
         List<? extends BaseIndex> indicatorList = indexValues.get(indicator);
         
@@ -238,8 +242,7 @@ public class DetailedRiskService {
 			values.add(pos.getMktVal());
 			seriesItem.setValues(values);
 			
-			// @TODO: RG, obtain the security name
-			seriesItem.setText("Security #" + ((int)(Math.random() * 5000)));
+			seriesItem.setText(pos.getSecurityName());
 			seriesItem.setBackgroundColor(colour);
 			seriesItem.setLegendText("%t<br><b>$%v</b>");
 			
@@ -269,6 +272,9 @@ public class DetailedRiskService {
 	}
 
 	private IndicatorValue getIndicatorValueForPosition(IndicatorName indicator, List<? extends BaseIndex> indicatorList, Position pos) {
+		if(IndicatorName.ReputationRisk.equals(indicator)){
+			return thresholdMappingService.mapToValue(indicator, pos.getRepRisk().getValue());
+		}
 		for(BaseIndex idx : indicatorList) {
 			if(idx.getCountry().equals(pos.getCountry().getCode())){
 				return thresholdMappingService.mapToValue(indicator, new BigDecimal(idx.getVal()));
