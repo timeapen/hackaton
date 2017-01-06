@@ -242,8 +242,7 @@ public class DetailedRiskService {
 			values.add(pos.getMktVal());
 			seriesItem.setValues(values);
 			
-			// @TODO: RG, obtain the security name
-			seriesItem.setText("Security #" + ((int)(Math.random() * 5000)));
+			seriesItem.setText(pos.getSecurityName());
 			seriesItem.setBackgroundColor(colour);
 			seriesItem.setLegendText("%t<br><b>$%v</b>");
 			

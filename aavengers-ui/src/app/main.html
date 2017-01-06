@@ -1,6 +1,14 @@
 <div class="main-container">
   <fountain-header></fountain-header>
   <main class="main">
+	<md-input-container>
+	  <label>Year</label>
+	  <md-select ng-model="year" placeholder="2016" ng-change="$ctrl.yearChange(this.year)">
+	    <md-option ng-repeat="year in $ctrl.years" ng-value="year">
+	      {{year}}
+	    </md-option>
+	  </md-select>
+	</md-input-container>
     <radar></radar>
     <pie></pie>
   </main>
