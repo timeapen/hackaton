@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aavengers.IndicatorsAcceptanceLevel;
+import com.aavengers.service.ThresholdMappingService;
+
 @Controller
 @CrossOrigin
 public class IndicatorsController {
@@ -29,6 +32,20 @@ public class IndicatorsController {
     public Indicators getIndicators() {
         Indicators result = new Indicators(IndicatorName.values(), IndicatorValue.values());
         return result;
+    }
+    
+    @ResponseBody
+    @GetMapping(value = "/indicators/acceptance", produces = "application/json")
+    public IndicatorsAcceptanceLevel getIndicatorAcceptanceLevel() {
+        return new IndicatorsAcceptanceLevel(ThresholdMappingService.getAcceptanceThresholds());
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/indicators/acceptance", consumes = "application/json")
+    public void storeIndicators(@RequestBody IndicatorsAcceptanceLevel levels) {
+        for(String indicator : levels.getLevels().keySet()) {
+            ThresholdMappingService.updateThreshold(IndicatorName.valueOf(indicator), levels.getLevels().get(indicator));
+        }
     }
     
     @ResponseBody
@@ -47,4 +64,5 @@ public class IndicatorsController {
     	
     	return new ResponseEntity<IndicatorSettings>(toUpdate, HttpStatus.OK);
     }
+    
 }

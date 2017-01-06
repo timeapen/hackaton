@@ -128,7 +128,7 @@ class Indicators {
     seriesItem.values.push(position.amount);
 
     // URL for drill down pie chart
-    seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${accountId}/${type}/${indicator}`;
+    seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${indicator}/${type}/${accountId}`;
 
     seriesItem.target = "graph";
     seriesItem.text = position.title;

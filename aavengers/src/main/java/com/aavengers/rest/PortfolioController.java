@@ -51,7 +51,7 @@ public class PortfolioController {
     }
     
     @ResponseBody
-    @GetMapping(value = "/detailedRisk/{accountNumber}/{type}/{indicator}", produces = "application/json")
+    @GetMapping(value = "/detailedRisk/{indicator}/{type}/{accountNumber}", produces = "application/json")
     public DetailedRisk getDetailedRisk(@PathVariable String accountNumber, @PathVariable String type, @PathVariable String indicator) {
     	return detailedRiskService.detailedRiskForClient(IndicatorName.valueOf(indicator), IndicatorValue.valueOf(type), 2016, accountNumber.split("\\|"));
     }
