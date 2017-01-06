@@ -18,7 +18,7 @@ public class ThresholdMappingService {
         valueThresholds = new HashMap<>();
         updateThreshold(IndicatorName.Conflict, 20);
         updateThreshold(IndicatorName.Corruption, 20);
-        updateThreshold(IndicatorName.Freedom, 20);
+        updateThreshold(IndicatorName.BusinessFreedom, 20);
         updateThreshold(IndicatorName.Environment, 20);
         updateThreshold(IndicatorName.ReputationRisk, 20);
     }

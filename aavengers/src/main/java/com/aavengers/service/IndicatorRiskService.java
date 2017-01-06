@@ -64,7 +64,7 @@ public class IndicatorRiskService {
         Map<IndicatorName, List<? extends BaseIndex>> indexValues = new HashMap<>();
         indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(year));
-        indexValues.put(IndicatorName.Freedom, freedomIndexRepository.findByYear(year));
+        indexValues.put(IndicatorName.BusinessFreedom, freedomIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Environment, environemntIndexRepository.findByYear(year));
 
         for(Position pos : positions) {
