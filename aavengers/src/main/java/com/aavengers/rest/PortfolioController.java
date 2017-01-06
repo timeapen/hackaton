@@ -47,7 +47,7 @@ public class PortfolioController {
     @GetMapping(value = "/indicatorRisk/{indicator}/{accountNumber}", produces = "application/json")
     public List<IndicatorRisk> getIndicatorRisk(@PathVariable String indicator, @PathVariable String accountNumber) {
     	LOGGER.info("getIndicatorRisk():: indicator: {}, accountNumber: {}", indicator, accountNumber);
-        return indicatorRiskService.getIndicatorRisk(indicator, 2016, accountNumber.split("\\|"));
+        return indicatorRiskService.getIndicatorRisk(IndicatorName.valueOf(indicator), 2016, accountNumber.split("\\|"));
     }
     
     @ResponseBody

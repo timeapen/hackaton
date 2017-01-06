@@ -41,7 +41,15 @@ public class IndicatorRiskService {
     @Autowired
     ThresholdMappingService thresholdMappingService;
 
-    public List<IndicatorRisk> getIndicatorRisk(String indicatorName, int year, String... accountNumbers) {
+    public List<IndicatorRisk> getIndicatorRisk(IndicatorName indicatorName, int year, String... accountNumbers) {
+        if(IndicatorName.ReputationRisk.equals(indicatorName)) {
+            return getIndicatorRepRisk(year, accountNumbers);
+        } else {
+            return getIndicatorRiskInternal(indicatorName, year, accountNumbers);
+        }
+    }
+
+    public List<IndicatorRisk> getIndicatorRiskInternal(IndicatorName indicator, int year, String... accountNumbers) {
     	
     	LinkedHashMap<IndicatorValue, BigDecimal> data = new LinkedHashMap<>();
         data.put(IndicatorValue.Poor, BigDecimal.ZERO);
@@ -52,8 +60,7 @@ public class IndicatorRiskService {
         
         List<Position> positions = positionRepository.findByAcctNumIn(accountNumbers);
 
-        IndicatorName indicator = IndicatorName.valueOf(indicatorName);
-        
+
         Map<IndicatorName, List<? extends BaseIndex>> indexValues = new HashMap<>();
         indexValues.put(IndicatorName.Corruption, corruptionIndexRepository.findByYear(year));
         indexValues.put(IndicatorName.Conflict, conflictIndexRepository.findByYear(year));
@@ -83,6 +90,41 @@ public class IndicatorRiskService {
         return result;
     }
 
+    public List<IndicatorRisk> getIndicatorRepRisk(int year, String... accountNumbers) {
+
+        LinkedHashMap<IndicatorValue, BigDecimal> data = new LinkedHashMap<>();
+        data.put(IndicatorValue.Poor, BigDecimal.ZERO);
+        data.put(IndicatorValue.Fair, BigDecimal.ZERO);
+        data.put(IndicatorValue.Good, BigDecimal.ZERO);
+        data.put(IndicatorValue.VeryGood, BigDecimal.ZERO);
+        data.put(IndicatorValue.Excellent, BigDecimal.ZERO);
+
+        List<Position> positions = positionRepository.findByAcctNumIn(accountNumbers);
+
+
+        for(Position pos : positions) {
+            BigDecimal posIndicator = pos.getRepRisk().getValue();
+            if(posIndicator == null) {
+                continue;
+            }
+            IndicatorValue posIndicatorValue = thresholdMappingService.mapToValue(IndicatorName.Conflict.ReputationRisk, posIndicator);
+            data.put(posIndicatorValue, data.get(posIndicatorValue).add(pos.getMktVal()));
+        }
+
+        List<IndicatorRisk> result = new ArrayList<>();
+        for(Map.Entry<IndicatorValue, BigDecimal> e : data.entrySet()) {
+
+            if(e.getValue().intValue() == 0) {
+                // @TODO: RG, remove
+                continue;
+            }
+
+            result.add(new IndicatorRisk(e.getKey(), e.getValue()));
+        }
+
+        return result;
+    }
+
 	private BigDecimal getIndicatorForPosition(List<? extends BaseIndex> list, Country country) {
 		for(BaseIndex idx : list) {
 			if(idx.getCountry().equals(country.getCode())) {
@@ -91,8 +133,4 @@ public class IndicatorRiskService {
 		}
 		return null;
 	}
-
-	
-
-    
 }

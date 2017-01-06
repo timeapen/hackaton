@@ -44,6 +44,7 @@ public class RiskService {
         data.put(IndicatorName.Conflict, thresholdMappingService.mapToValue(IndicatorName.Conflict, getConflictIndexValue(year, positions)));
         data.put(IndicatorName.Freedom, thresholdMappingService.mapToValue(IndicatorName.Freedom, getFreedomIndexValue(year, positions)));
         data.put(IndicatorName.Environment, thresholdMappingService.mapToValue(IndicatorName.Environment, getEnvironmentIndexValue(year, positions)));
+        data.put(IndicatorName.ReputationRisk, thresholdMappingService.mapToValue(IndicatorName.ReputationRisk, getRepRiskIndexValue(year, positions)));
 
         return new OverallRisk(data);
     }
@@ -62,6 +63,21 @@ public class RiskService {
 
     private BigDecimal getEnvironmentIndexValue(int year, List<Position> positions) {
         return averageValue(positions, environmentIndexRepository.findByYear(year));
+    }
+
+    private BigDecimal getRepRiskIndexValue(int year, List<Position> positions) {
+        BigDecimal calculatedTotal = BigDecimal.ZERO;
+        BigDecimal totalMarketValue = BigDecimal.ZERO;
+
+        for(Position pos : positions) {
+            BigDecimal posCorruptionIdx = pos.getRepRisk().getValue();
+            if(posCorruptionIdx == null) {
+                continue;
+            }
+            calculatedTotal = calculatedTotal.add(posCorruptionIdx.multiply(pos.getMktVal()));
+            totalMarketValue = totalMarketValue.add(pos.getMktVal());
+        }
+        return calculatedTotal.divide(totalMarketValue);
     }
 
     private BigDecimal averageValue(List<Position> positions, List<? extends BaseIndex> corruptionIdx) {

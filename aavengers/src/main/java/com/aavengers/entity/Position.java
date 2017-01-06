@@ -33,6 +33,9 @@ public class Position {
     @JoinColumn(name="Cntry_Cd_Rpt",referencedColumnName="code")
     Country country;
 
+    @ManyToOne(optional=false)
+    @JoinColumn(name="Security_Description",referencedColumnName="Security_Description")
+    ReputationRisk repRisk;
 
     public Long getId() {
         return id;
@@ -88,5 +91,13 @@ public class Position {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public ReputationRisk getRepRisk() {
+        return repRisk;
+    }
+
+    public void setRepRisk(ReputationRisk repRisk) {
+        this.repRisk = repRisk;
     }
 }
