@@ -5,4 +5,3 @@ CREATE TABLE Preferences (
      Envi_Pref      int,
      Conf_Pref      int
 );
-
