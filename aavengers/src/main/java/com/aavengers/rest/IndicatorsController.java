@@ -6,6 +6,9 @@ import com.aavengers.Indicators;
 import com.aavengers.data.IndicatorSettingsRepository;
 import com.aavengers.entity.IndicatorSettings;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -51,8 +54,13 @@ public class IndicatorsController {
     @ResponseBody
     @GetMapping(value = "/indicators/settings", produces = "application/json")
     public Iterable<IndicatorSettings> getIndicatorSettings() {
-        Iterable<IndicatorSettings> result = indicatorSettingsRepository.findAll();
-        return result;
+    	List<IndicatorSettings> result = new LinkedList<IndicatorSettings>();
+    	
+    	for(IndicatorName indicatorNameOrdered : IndicatorName.values()) {
+    		result.add(indicatorSettingsRepository.findByIndicatorName(indicatorNameOrdered.name()));
+    	}
+    	
+    	return result;
     }
     
     @PostMapping(value = "/indicators/settings", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

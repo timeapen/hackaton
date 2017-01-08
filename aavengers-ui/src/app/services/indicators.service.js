@@ -12,7 +12,7 @@ class Indicators {
 
   getGaiaIndicators() {
     return this.$http
-      .get(`http://${serverDomain}/indicators`);
+      .get(`${serverDomain}/indicators`);
   }
 
 }

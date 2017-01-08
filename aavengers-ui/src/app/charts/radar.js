@@ -1,4 +1,4 @@
-const accountId = '92692004|000133190USD|000100292HKD|000133077CHF|000133468EUR|000100675PHP|000667640GBP';
+const accounts = '92692004|000133190USD|000100292HKD|000133077CHF|000133468EUR|000100675PHP|000667640GBP';
 
 class RadarController {
   /** @ngInject */
@@ -8,9 +8,20 @@ class RadarController {
     indicators.getGaiaIndicators()
       .then(response => {
         const indicators = response.data;
-        chartData.createRadarChartIndicators(accountId, indicators)
+        chartData.createRadarChartIndicators(accounts, indicators)
           .then(response => {
             this.chartData = response;
+
+            chartData.getRadarIndicatorTargets()
+              .then(response => {
+                chartData.getRadarChartTargetIndicatorData(response.data)
+                  .then(response => {
+                    const series = [];
+                    series.push(response);
+                    series.push(this.chartData.series[0]);
+                    this.chartData.series = series;
+                  });
+              });
           });
       });
   }

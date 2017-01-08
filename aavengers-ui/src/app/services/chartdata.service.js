@@ -8,13 +8,11 @@ class ChartData {
 
   /** @ngInject */
   constructor($http, $log) {
-    $log.info("Creating Indicators Service");
     this.$http = $http;
     this.$log = $log;
   }
 
-  createRadarChartIndicators(companyId, indicators) {
-    this.$log.info("Generating radar chart indicators for company id: ", companyId);
+  createRadarChartIndicators(accounts, indicators) {
     return this.getRadarChartFormat()
       .then(response => {
         const chartData = response.data;
@@ -22,15 +20,12 @@ class ChartData {
         chartData["scale-k"].values = indicators.indicators;
         chartData["scale-v"].values = indicators.valueThresholds;
 
-        return this.getRadarIndicatorScores(companyId)
+        return this.getRadarIndicatorScores(accounts)
           .then(response => {
-            this.$log.info("Radar Indicator Scores: ", response.data);
             const riskScores = response.data.riskData;
-            this.$log.info("Radar Indicator Targets: ", response.data);
             return this.getRadarSeriesDataFormat()
               .then(response => {
                 chartData.series = this.createIndicatorScores(riskScores, indicators.indicators, response.data);
-                this.$log.info("My chart data: ", chartData);
                 return chartData;
               });
           });
@@ -61,17 +56,17 @@ class ChartData {
 
   getGaiaIndicators() {
     return this.$http
-              .get(`http://${serverDomain}/indicators`);
+              .get(`${serverDomain}/indicators`);
   }
 
-  getRadarIndicatorScores(companyId) {
+  getRadarIndicatorScores(accounts) {
     return this.$http
-      .get(`http://${serverDomain}/portfolio/overallRisk/${companyId}`);
+      .get(`${serverDomain}/portfolio/overallRisk/${accounts}`);
   }
 
   getRadarIndicatorTargets() {
     return this.$http
-        .get(`http://${serverDomain}/indicators/settings`);
+      .get(`${serverDomain}/indicators/settings`);
   }
 
   getRadarSeriesDataFormat() {
@@ -79,20 +74,18 @@ class ChartData {
      .get('app/charts/radar-series.json');
   }
 
-  createPieChart(accountId, indicator) {
-    this.$log.info("Generating pie chart indicators");
-
+  createPieChart(accounts, indicator) {
     return this.getPieChartFormat()
       .then(response => {
         const chartData = response.data;
 
-        return this.getIndicatorRiskData(accountId, indicator)
+        return this.getIndicatorRiskData(accounts, indicator)
           .then(response => {
             const serverAggregate = response.data;
 
             const series = [];
             angular.forEach(serverAggregate, (value => {
-              series.push(this.createPieSeriesItem(value, accountId, indicator));
+              series.push(this.createPieSeriesItem(value, accounts, indicator));
             }));
 
             angular.merge(chartData.graphset[0].title, {text: indicator});
@@ -110,13 +103,13 @@ class ChartData {
               .get('app/charts/pie/pie.json');
   }
 
-  getIndicatorRiskData(accountId, indicator) {
+  getIndicatorRiskData(accounts, indicator) {
     return this.$http
             // series data from backend
-            .get(`${serverDomain}/portfolio/indicatorRisk/${indicator}/${accountId}`);
+            .get(`${serverDomain}/portfolio/indicatorRisk/${indicator}/${accounts}`);
   }
 
-  createPieSeriesItem(position, accountId, indicator) {
+  createPieSeriesItem(position, accounts, indicator) {
     const type = position.type;
     const colour = colours[type];
 
@@ -125,7 +118,7 @@ class ChartData {
     seriesItem.values.push(position.amount);
 
     // URL for drill down pie chart
-    seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${indicator}/${type}/${accountId}`;
+    seriesItem.url = `${serverDomain}/portfolio/detailedRisk/${indicator}/${type}/${accounts}`;
 
     seriesItem.target = "graph";
     seriesItem.text = position.title;
@@ -148,7 +141,28 @@ class ChartData {
 
     return seriesItem;
   }
+
+  getRadarChartTargetIndicatorData(targetIndicators) {
+    return this.getRadarSeriesDataFormat()
+      .then(response => {
+        const scoresFormat = response.data;
+        scoresFormat.lineColor = '#002888';
+
+        const scoreChartData = {};
+        Object.assign(scoreChartData, scoresFormat);
+        scoreChartData.text = 'Target';
+
+        const chartRiskScores = [];
+        angular.forEach(targetIndicators, (targetIndicator => {
+          chartRiskScores.push(targetIndicator.indicatorValue);
+        }));
+        scoreChartData.values = chartRiskScores;
+
+        return scoreChartData;
+      });
+  }
 }
+
 export default angular.module('services.chartData', [])
   .service('chartData', ChartData)
   .name;
