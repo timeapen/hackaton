@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <artifactId>aavengers-app</artifactId>
+ <packaging>war</packaging>
+ <groupId>com.aavengers</groupId> 
+  <version>0.0.1-SNAPSHOT</version> 
+ 
+ <properties>
+ <tomcat.version>7.0.63</tomcat.version>
+ </properties>
+ <dependencies>
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-legacy</artifactId>
+   <version>1.0.1.RELEASE</version>
+  </dependency>
+  <dependency>
+    <artifactId>aavengers-ui</artifactId>
+    <groupId>com.aavengers</groupId> 
+    <version>0.0.1-SNAPSHOT</version> 
+   </dependency>
+  <dependency>
+    <artifactId>aavengers</artifactId>
+    <groupId>com.aavengers</groupId> 
+    <version>0.0.1-SNAPSHOT</version> 
+   </dependency>
+  
+  <dependency>
+   <groupId>javax.el</groupId>
+   <artifactId>javax.el-api</artifactId>
+   <version>2.2.4</version>
+  </dependency>
+  <dependency>
+   <groupId>org.glassfish.web</groupId>
+   <artifactId>javax.el</artifactId>
+   <version>2.2.4</version>
+  </dependency>
+ </dependencies>
+ <dependencyManagement>
+  <dependencies>
+   <!-- Lock hibernate version so JPA 2.0 is used by the application. Bluemix does not support JPA 2.1 -->
+   <dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>4.2.20.Final</version>
+   </dependency>
+   <dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>4.2.20.Final</version>
+   </dependency>
+   <!-- Lock Tomcat version to be Java 6 compatible -->
+   <dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-jdbc</artifactId>
+    <version>${tomcat.version}</version>
+   </dependency>
+   <dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-dbcp</artifactId>
+    <version>${tomcat.version}</version>
+   </dependency>
+   <dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-core</artifactId>
+    <version>${tomcat.version}</version>
+   </dependency>
+   <dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-el</artifactId>
+    <version>${tomcat.version}</version>
+   </dependency>
+   <dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-logging-juli</artifactId>
+    <version>${tomcat.version}</version>
+   </dependency>
+   
+   <dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-websocket</artifactId>
+    <version>${tomcat.version}</version>
+   </dependency>
+   <!-- Set MQ dependencies to provided scope -->
+   <!-- <dependency> <groupId>com.ibm.mq</groupId> <artifactId>mq-aix</artifactId>
+    <scope>provided</scope> </dependency> <dependency> <groupId>com.ibm.mq</groupId>
+    <artifactId>dhbcore-aix</artifactId> <scope>provided</scope> </dependency>
+    <dependency> <groupId>com.ibm.mq</groupId> <artifactId>jmqi-aix</artifactId>
+    <scope>provided</scope> </dependency> <dependency> <groupId>com.ibm.mq</groupId>
+    <artifactId>mqjms-aix</artifactId> <scope>provided</scope> </dependency>
+    <dependency> <groupId>com.ibm.mq</groupId> <artifactId>commonservices-aix</artifactId>
+    <scope>provided</scope> </dependency> <dependency> <groupId>com.ibm.mq</groupId>
+    <artifactId>headers-aix</artifactId> <scope>provided</scope> </dependency>
+    <dependency> <groupId>javax.jms</groupId> <artifactId>jms-api</artifactId>
+    <scope>provided</scope> </dependency> -->
+  </dependencies>
+ </dependencyManagement>
+ <build>
+  <resources>
+   <resource>
+    <directory>src/main/resources</directory>
+    <filtering>true</filtering>
+   </resource>
+  </resources>
+  <plugins>
+   <plugin>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>2.6</version>
+    <configuration>
+     <failOnMissingWebXml>false</failOnMissingWebXml>
+     <webResources>
+      <resource>
+       <directory>${project.build.directory}/micro-app/static/</directory>
+      </resource>
+     </webResources>
+    </configuration>
+   </plugin>
+   
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>2.10</version>
+    <executions>
+     <execution>
+      <id>unpack-dependencies</id>
+      <phase>compile</phase>
+      <goals>
+       <goal>unpack-dependencies</goal>
+      </goals>
+      <configuration>
+       <includeArtifactIds>aavengers-ui</includeArtifactIds>
+       <overWrite>false</overWrite>
+       <outputDirectory>${project.build.directory}/micro-app/static</outputDirectory>
+       <includes>**/*</includes>
+      </configuration>
+     </execution>
+    </executions>
+   </plugin>
+   <!--plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <version>1.2.6.RELEASE</version>
+    <executions>
+     <execution>
+      <goals>
+       <goal>repackage</goal>
+      </goals>
+      <configuration>
+       <classifier>exec</classifier>
+      </configuration>
+     </execution>
+    </executions>
+   </plugin-->
+  </plugins>
+
+  
+ </build>
+ <profiles>
+    <profile>
+      <id>deploy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.cloudfoundry</groupId>
+            <artifactId>cf-maven-plugin</artifactId>
+            <version>1.1.0</version>
+            <configuration>
+              <target>https://api.ng.bluemix.net</target>
+              <appname>gaia-aavengers</appname>
+              <org>AgileAvengers</org>
+              <space>dev</space>
+              <username>tim.eapen@rbc.com</username>
+              <password>Burkhardt1.</password>
+              <instances>1</instances>
+              <memory>512</memory>
+              <env>
+                <!-- Set any environment variables -->
+                <myvar>myvalue</myvar>
+              </env>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>push</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.5</version>
+            <executions>
+              <execution>
+                <id>auto-clean</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>clean</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
