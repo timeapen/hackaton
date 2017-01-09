@@ -38,7 +38,7 @@
       </goals>
       <phase>generate-resources</phase>
       <configuration>
-       <nodeVersion>v4.2.2</nodeVersion>
+       <nodeVersion>v6.9.3</nodeVersion>
        <npmVersion>3.5.0</npmVersion>
         </configuration>
      </execution>
@@ -51,7 +51,7 @@
        <arguments>install</arguments>
       </configuration>
      </execution>
-     <execution>
+     <!--execution>
       <id>bower install</id>
       <goals>
        <goal>bower</goal>
@@ -59,7 +59,7 @@
       <configuration>
        <arguments>install</arguments>
       </configuration>
-     </execution>
+     </execution-->
      <execution>
       <id>gulp build</id>
       <goals>
@@ -69,17 +69,7 @@
        <arguments>--no-color build</arguments>
       </configuration>
      </execution>
-     <execution>
-      <id>javascript tests</id>
-      <goals>
-       <goal>gulp</goal>
-      </goals>
-      <phase>test</phase>
-      <configuration>
-       <arguments>test</arguments>
-       <karmaConfPath>karma.conf.js</karmaConfPath>
-      </configuration>
-     </execution>
+
     </executions>
    </plugin>
    <plugin>
