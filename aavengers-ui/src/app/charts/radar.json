@@ -12,7 +12,7 @@
   "title": {
     "text": "Portfolio Performance",
     "background-color": "none",
-    "font-color": "000",
+    "font-color": "#616161",
     "font-size": "22px"
   },
   "tooltip": {

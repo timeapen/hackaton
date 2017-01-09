@@ -113,7 +113,7 @@ public class DetailedRiskService {
 	    @SuppressWarnings("serial")
 		Map<String, HTMLColour> colours = new HashMap<String, HTMLColour>() {{
 	    	put(IndicatorValue.Poor.name(), new HTMLColour(249, 63, 38));
-	    	put(IndicatorValue.Fair.name(), new HTMLColour(254, 223, 1));
+	    	put(IndicatorValue.Fair.name(), new HTMLColour(254, 163, 17));
 	    	put(IndicatorValue.Good.name(), new HTMLColour(0, 133, 0));
 	    	put(IndicatorValue.VeryGood.name(), new HTMLColour(106, 173, 228));
 	    	put(IndicatorValue.Excellent.name(), new HTMLColour(0, 40, 136));
