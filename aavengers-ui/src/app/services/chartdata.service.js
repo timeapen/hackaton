@@ -37,7 +37,7 @@ class ChartData {
 
     const scoreChartData = {};
     Object.assign(scoreChartData, scoresFormat);
-    scoreChartData.text = 'Portfolio';
+    scoreChartData.text = 'Current';
 
     const chartRiskScores = [];
     angular.forEach(indicators, (indicator => {
