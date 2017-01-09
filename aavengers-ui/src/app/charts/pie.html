@@ -1,3 +1,5 @@
-<div ng-repeat="indicator in $ctrl.indicatorPieChartData" class="pie">
-  <zingchart zc-json = "indicator" zc-height = "300" zc-width = "300" ></zingchart>
+<div id="pie-wrapper" class="pie-wrapper">
+  <div ng-repeat="indicator in $ctrl.indicatorPieChartData" class="pie">
+    <zingchart zc-json = "indicator" zc-height = "300" zc-width = "300" ></zingchart>
+  </div>
 </div>

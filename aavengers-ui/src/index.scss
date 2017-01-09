@@ -31,7 +31,7 @@ a {
 .header {
   display: flex;
   align-items: center;
-  background-color: #1f1f1f;
+  background-color: #002888;
 }
 .header-title {
   flex: 1;
@@ -43,6 +43,9 @@ a {
   text-align: right;
   margin: 1rem;
   white: white;
+}
+.header-link {
+  color: #FEDF01;
 }
 
 .title {
@@ -73,7 +76,7 @@ a {
 .footer {
   padding: 0.5rem;
   font-size: 1rem;
-  background-color: #1f1f1f;
+  background-color: #002888;
   text-align: center;
   color: white;
 }
@@ -84,4 +87,9 @@ a {
   height: 300;
   border: 1px solid #CCCCCC;
   margin-right: 6px;
+}
+
+.pie-wrapper {
+  text-align: center;
+  padding: 10px;
 }
