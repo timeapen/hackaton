@@ -54,19 +54,9 @@ class ChartData {
               .get('app/charts/radar.json');
   }
 
-  getGaiaIndicators() {
-    return this.$http
-              .get(`${serverDomain}/indicators`);
-  }
-
   getRadarIndicatorScores(accounts) {
     return this.$http
       .get(`${serverDomain}/portfolio/overallRisk/${accounts}`);
-  }
-
-  getRadarIndicatorTargets() {
-    return this.$http
-      .get(`${serverDomain}/indicators/settings`);
   }
 
   getRadarSeriesDataFormat() {

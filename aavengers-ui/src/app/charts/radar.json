@@ -5,7 +5,7 @@
     "animation": {
      "effect":2,
      "sequence":1,
-     "speed":700
+     "speed":2000
     }
   },
   "background-color": "white",

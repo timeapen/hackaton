@@ -2,17 +2,17 @@ const accounts = '92692004|000133190USD|000100292HKD|000133077CHF|000133468EUR|0
 
 class RadarController {
   /** @ngInject */
-  constructor($http, $log, indicators, chartData) {
+  constructor($http, $log, indicatorsService, chartData) {
     $log.info('RADAR Controller');
 
-    indicators.getGaiaIndicators()
+    indicatorsService.getGaiaIndicators()
       .then(response => {
         const indicators = response.data;
         chartData.createRadarChartIndicators(accounts, indicators)
           .then(response => {
             this.chartData = response;
 
-            chartData.getRadarIndicatorTargets()
+            indicatorsService.getGaiaIndicatorsTargets()
               .then(response => {
                 chartData.getRadarChartTargetIndicatorData(response.data)
                   .then(response => {

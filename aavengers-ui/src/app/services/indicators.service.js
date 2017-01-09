@@ -2,7 +2,7 @@ import angualar from 'angular';
 
 const serverDomain = '//localhost:8080/gaia';
 
-class Indicators {
+class IndicatorsService {
 
   /** @ngInject **/
   constructor($http, $log) {
@@ -15,8 +15,13 @@ class Indicators {
       .get(`${serverDomain}/indicators`);
   }
 
+  getGaiaIndicatorsTargets() {
+    return this.$http
+      .get(`${serverDomain}/indicators/settings`);
+  }
+
 }
 
 export default angualar.module('services.indicators', [])
-  .service('indicators', Indicators)
+  .service('indicatorsService', IndicatorsService)
   .name;
