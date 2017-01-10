@@ -1,12 +1,40 @@
 <fountain-header></fountain-header>
-<md-content class="md-padding" >
-  <div layout="column" layout-gt-xs="row" >
-    <md-card flex flex-gt-xs="3"2zin>
-       <radar></radar>
-    </md-card>
-    <md-card flex flex-gt-xs="38">
-      <pie></pie>
-    </md-card>
+
+<!-- we have different views for different resolutions due 
+     to how we want to display charts beside each other or stacked and way
+     ZingChart will take a minimum size and is not fully responsive for the entire chart
+     Use ng-if not hide since hide would execute backend service for all views 
+     whereas ng-if only executes where condition is true -->
+
+<!-- portrait mobile, tell them to turn landscape -->
+<div ng-if="$ctrl.$mdMedia('xs')" flex>
+  Please turn device in landscape.  Thank you :)
+</div>
+
+<!-- landscape for mobile / portrait for tablet -->
+<div layout="row" layout-wrap ng-if="$ctrl.$mdMedia('sm')" flex>
+  <radar></radar>
+  <pie></pie>
+</div>
+
+<!-- portrait for tablet -->
+<div layout="row" layout-wrap ng-if="$ctrl.$mdMedia('md')" flex>
+  <div flex="60">
+    <radar></radar>
   </div>
-</md-content>
+  <div flex="40">
+    <pie></pie>
+  </div>
+</div>
+
+<!-- computer (ie. laptop, desktop, monitor) -->
+<div layout="row" layout-wrap ng-if="$ctrl.$mdMedia('lg') || $ctrl.$mdMedia('xl')" flex>
+  <div flex="50">
+    <radar></radar>
+  </div>
+  <div flex="50">
+    <pie></pie>
+  </div>
+</div>
+
 <fountain-footer></fountain-footer>

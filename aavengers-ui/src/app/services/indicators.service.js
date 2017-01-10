@@ -1,10 +1,10 @@
 import angualar from 'angular';
 
-const serverDomain = '//localhost:8080/gaia';
+const serverDomain = '//192.168.0.17:8080/gaia';
 
 class IndicatorsService {
 
-  /** @ngInject **/
+  /* @ngInject */
   constructor($http, $log) {
     this.$http = $http;
     this.$log = $log;

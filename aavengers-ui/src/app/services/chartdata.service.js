@@ -1,12 +1,12 @@
 import angular from 'angular';
 
 // Constants should be eventually pulled out into configuration data, retrieved from the server
-const serverDomain = '//localhost:8080/gaia';
+const serverDomain = '//192.168.0.17:8080/gaia';
 const colours = {Poor: '#F93F26', Fair: '#FCA311', Good: '#008500', VeryGood: '#6AADE4', Excellent: '#002888'};
 
 class ChartData {
 
-  /** @ngInject */
+  /* @ngInject */
   constructor($http, $log) {
     this.$http = $http;
     this.$log = $log;

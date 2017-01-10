@@ -4,7 +4,7 @@ const userIndicators = ['Corruption', 'Conflict', 'BusinessFreedom', 'Environmen
 
 class PieController {
 
-  /** @ngInject */
+  /* @ngInject */
   constructor($http, $log, chartData) {
     $log.info('PIE Controller');
     this.$log = $log;

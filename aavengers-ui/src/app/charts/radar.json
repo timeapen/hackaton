@@ -2,7 +2,7 @@
   "type": "radar",
   "legend":{
     "x": "2%",
-    "y": "89%",
+    "y": "80%",
     "item" : {
       "font-size": 12
     }
@@ -30,8 +30,8 @@
   "scale-k": {
     "background-color": "none",
     "item": {
-      "font-size": "14px",
-      "padding-left": "30px",
+      "font-size": "11px",
+      "padding-left": "5px",
       "padding-bottom": "15px",
       "bold": true
     },

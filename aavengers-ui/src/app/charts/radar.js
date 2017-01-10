@@ -1,7 +1,8 @@
 const accounts = '92692004|000133190USD|000100292HKD|000133077CHF|000133468EUR|000100675PHP|000667640GBP';
 
 class RadarController {
-  /** @ngInject */
+
+  /* @ngInject */
   constructor($http, $log, indicatorsService, chartData) {
     $log.info('RADAR Controller');
 

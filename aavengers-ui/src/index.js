@@ -25,9 +25,4 @@ angular
   .config(routesConfig)
   .component('app', main)
   .component('fountainHeader', header)
-  .component('fountainFooter', footer)
-  .config($mdThemingProvider => {
-    $mdThemingProvider.theme('default')
-      .primaryPalette('brown')
-      .accentPalette('red');
-  });
+  .component('fountainFooter', footer);
