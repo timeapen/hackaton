@@ -1,5 +1,12 @@
 {
   "type": "radar",
+  "legend":{
+    "x": "2%",
+    "y": "80%",
+    "item" : {
+      "font-size": 12
+    }
+  },  
   "plot" : {
     "aspect": "area",
     "animation": {
@@ -23,9 +30,10 @@
   "scale-k": {
     "background-color": "none",
     "item": {
-      "font-size": "14px",
-      "padding-left": "30px",
-      "padding-bottom": "15px"
+      "font-size": "11px",
+      "padding-left": "5px",
+      "padding-bottom": "15px",
+      "bold": true
     },
     "guide": {
       "line-color": "#818181",
@@ -44,7 +52,8 @@
   "scale-v": {
     "ref-line": {
       "line-width": "1px",
-      "line-color": "#818181"
+      "line-color": "#818181",
+      "bold": true
     },
     "guide": {
       "line-width": ".5px",

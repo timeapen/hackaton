@@ -5,7 +5,7 @@ const serverDomain = '//gaia-aavengers.mybluemix.net/gaia';
 
 class IndicatorsService {
 
-  /** @ngInject */
+  /* @ngInject */
   constructor($http, $log) {
     this.$http = $http;
     this.$log = $log;
