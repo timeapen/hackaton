@@ -1,7 +1,7 @@
 
 import angualar from 'angular';
 
-const serverDomain = '//gaia-aavengers.mybluemix.net/gaia/';
+const serverDomain = '//gaia-aavengers.mybluemix.net/gaia';
 
 class IndicatorsService {
 
