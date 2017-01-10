@@ -27,12 +27,22 @@
   </div>
 </div>
 
-<!-- computer (ie. laptop, desktop, monitor) -->
-<div layout="row" layout-wrap ng-if="$ctrl.$mdMedia('lg') || $ctrl.$mdMedia('xl')" flex>
+<!-- computer (ie. laptop) -->
+<div layout="row" layout-wrap ng-if="$ctrl.$mdMedia('lg')" flex>
   <div flex="50">
     <radar></radar>
   </div>
   <div flex="50">
+    <pie></pie>
+  </div>
+</div>
+
+<!-- large display (ie. external monitor) -->
+<div layout="row" layout-wrap ng-if="$ctrl.$mdMedia('xl')" flex>
+  <div flex="40">
+    <radar></radar>
+  </div>
+  <div flex="60">
     <pie></pie>
   </div>
 </div>
